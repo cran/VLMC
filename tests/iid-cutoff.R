@@ -7,8 +7,9 @@ rain4c <- cut(OZrain, c(-.1, 0.5, 18.5, 50.1, 1000))
 table(rain4c <- as.integer(rain4c) - 1:1)
 
 fff <- function(x){
-    f <- vlmc(sr4, cut = x)$size["ord.MC"]
-    cat(formatC(x,wid=15),": ", formatC(f),"\n")
+    f <- (s <- vlmc(sr4, cut = x)$size)["ord.MC"]
+    cat(formatC(x,wid=15)," :  ", formatC(f,wid=2),
+        " (",formatC(s["total"],wid=5),")\n", sep="")
     f - 0.01
 }
 

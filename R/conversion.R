@@ -34,10 +34,11 @@ id2ctxt <- function(id, m = nchar(alpha), alpha = NULL) {
     r <- vector("list", n <- length(id <- as.integer(id)))
     i.ok <- !is.na(id)
     r[!i.ok] <- NA
-    lev <- floor(log(id, m))
+    lev <- floor(1e-7 + log(id, m))
 
     for(i in 1:n) if(i.ok[i]) {
         ii <- id[i]
+        ## convert ID `ii' to {0:(m-1)} coded vector `rr':
         rr <- integer(lev[i])
         for(ll in lev[i]:1) {
             rr[ll] <- ii %% m

@@ -1,19 +1,14 @@
 ## data() sets directory
-load("bnrf1ebv-cc.rda")#> .dcc is one long string
-bnrf1EB <- as.factor(strsplit(.dcc, "")[[1]])
-load("bnrf1hvs-cc.rda")
-bnrf1HV <- as.factor(strsplit(.dcc, "")[[1]])
-rm(.dcc)
+load("bnrf1.rda")
+bnrf1EB <- as.factor(strsplit(bnrf1EB, "")[[1]])
+bnrf1HV <- as.factor(strsplit(bnrf1HV, "")[[1]])
 
 ## How MM packaged these :
 if(FALSE) {
     nuc <- c("a","c","g","t")
-    (ddir <- file.path("","archives","Data-Collection","ShumwayStoffer-TSA"))
-
-    nchar(.dcc <- paste(nuc[scan(file.path(ddir,"bnrf1ebv.dat"))], collapse=""))
+    ddir <- "/archives/Data-Collection/ShumwayStoffer-TSA"
+    str(bnrf1EB <- paste(nuc[scan(file.path(ddir,"bnrf1ebv.dat"))],collapse=""))
+    str(bnrf1HV <- paste(nuc[scan(file.path(ddir,"bnrf1hvs.dat"))],collapse=""))
     setwd("/u/maechler/R/MM/STATISTICS/VLMC/VLMC/data")
-    save(.dcc,file="bnrf1ebv-cc.rda")
-
-    nchar(.dcc <- paste(nuc[scan(file.path(ddir,"bnrf1hvs.dat"))], collapse=""))
-    save(.dcc,file="bnrf1hvs-cc.rda")
+    save(bnrf1EB, bnrf1HV, file="bnrf1.rda")
 }

@@ -1,6 +1,6 @@
 
 R : Copyright 2002, The R Development Core Team
-Version 1.5.0 Under development (unstable) (2002-03-04)
+Version 1.5.0 Under development (unstable) (2002-04-08)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -16,7 +16,7 @@ Type `q()' to quit R.
 > .proctime00 <- proc.time()
 > require(VLMC)
 Loading required package: VLMC 
-Loading required package: mva 
+Loading required package: MASS 
 [1] TRUE
 > 
 > ## Currently, there's also an extensive AIC example in
