@@ -1,7 +1,7 @@
 Package: VLMC
-Version: 1.3-5
+Version: 1.3-6
 Note:    ===== vlmc.version in R/vlmc.R
-Date: 2003-11-07
+Date: 2003-12-17
 Author: Martin Maechler <maechler@stat.math.ethz.ch>
 Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
 Title: VLMC -- Variable Length Markov Chains

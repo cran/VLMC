@@ -58,6 +58,6 @@ entropy2 <- function(ivlmc1, ivlmc2, alpha.len = ivlmc1[1])
 
 ##Now in R:  AIC <- function (object, ...) UseMethod()
 
-if(!exists("AIC.default", mode = "function"))
-    ## not needed anymore when there's  AIC.default building in  logLik():
+## for R versions < 1.4:
+if(paste(R.version$major, R.version$minor, sep=".") < 1.4)
     AIC.vlmc <- (AIC.lm)#.Alias
