@@ -1,3 +1,18 @@
+2005-03-25  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.3-8
+	* R/vlmc.R: dito
+
+	* NAMESPACE: new
+
+	* R/zzz.R (.onLoad): instead of .First.lib
+
+	* man/bnrf1.Rd: drop 'require("ts")'
+
+2004-07-07  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* man/vlmc.Rd: updated reference: JCGS publication
+
 2004-05-05  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version, Date): 1.3-7

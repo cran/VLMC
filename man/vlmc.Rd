@@ -1,5 +1,6 @@
 % $Id: vlmc.Rd,v 1.10 2003/07/09 08:16:05 maechler Exp $
 \name{vlmc}
+\encoding{latin1}
 \title{Fit a Variable Length Markov Chain (VLMC)}
 \alias{vlmc}
 \alias{print.vlmc}
@@ -90,11 +91,11 @@ is.vlmc(x)
   Variable Length Markov Chains.
   \emph{Annals of Statistics} \bold{27}, 480--513.
 
-  Mächler M. and Bühlmann P. (2003)
-  Variable Length Markov Chains: Methodology, Computing and Software.
-  accepted for publication in \emph{J. Computational and Graphical Statistics}.
+  Mächler M. and Bühlmann P. (2004)
+  Variable Length Markov Chains: Methodology, Computing, and Software.
+  \emph{J. Computational and Graphical Statistics} \bold{2}, 435--455.
 
-  Mächler M. (2003)
+  Mächler M. (2004)
   VLMC --- Implementation and \R interface; working paper.
   %%Journal of Statistical Software, \emph{not yet submitted}.
 }

@@ -1,4 +1,5 @@
 \name{RCplot}
+\encoding{latin1}
 \alias{RCplot}
 \title{Residuals vs Context plot}
 \description{
@@ -52,9 +53,9 @@ RCplot(x, r2 = residuals(x, "deviance")^2,
   \item{rp}{a list as resulting from the above call to \code{plot.factor()}.}
 }
 \references{
-  Mächler M. and Bühlmann P. (2003)
-  Variable Length Markov Chains: Methodology, Computing and Software.
-  accepted for publication in \emph{J\. Computational and Graphical Statistics}.
+  Mächler M. and Bühlmann P. (2004)
+  Variable Length Markov Chains: Methodology, Computing, and Software.
+  \emph{J. Computational and Graphical Statistics} \bold{2}, 435--455.
 }
 \author{Martin Maechler}
 \seealso{\code{\link{summary.vlmc}} for other properties of a VLMC model.}

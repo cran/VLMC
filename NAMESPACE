@@ -1,0 +1,10 @@
+## Quick & Dirty: export all but objects starting with "." :
+exportPattern("^[^\\.]")
+
+## importFrom(stats,   <dendrogram class & methods> )
+
+## importFrom(MASS, rational, fractions)
+
+S3method(draw, vlmc)
+
+

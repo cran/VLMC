@@ -39,6 +39,7 @@
 10. Simulation for model selection, using [AB]IC, plus "Crossvalidation" etc
     --> provide user functions (? or use library(boot) ?
 
+11. Allow to restrict the maximal 'depth' !!
 
 
 -- vlmc(.. dump =TRUE) and (.. debug = TRUE) should probably NOT use

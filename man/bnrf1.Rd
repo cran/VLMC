@@ -34,13 +34,11 @@ table(bnrf1HV)
 n <- length(bnrf1HV)
 table(t = bnrf1HV[-1], "t-1" = bnrf1HV[-n])
 
-require(ts)
 plot(as.integer(bnrf1EB[1:500]), type = "b")
 \testonly{
  ftable(table( t = bnrf1HV[-(1:2)],
               "t-1" = bnrf1HV[-c(1,n)],
               "t-2" = bnrf1HV[-c(n-1,n)]))
- require(ts)
  lag.plot(jitter(as.ts(bnrf1HV)),lag = 4, pch = ".")
 }
 
