@@ -15,6 +15,7 @@ fff <- function(x){
 
 N <- 64# had 200
 r <- matrix(NA, 4, N)
+if(R.version$major != "1" || as.numeric(R.version$minor) >= 7) RNGversion("1.6")
 set.seed(6352)
 for(i in 1:N) {
     sr4 <- sample(rain4c)

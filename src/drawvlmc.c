@@ -1,10 +1,12 @@
-/* -- $Id: drawvlmc.c,v 1.10 2001/02/22 13:16:09 maechler Exp $
+/* -- $Id: drawvlmc.c,v 1.11 2002/11/29 10:42:39 maechler Exp $
  * -- draw_sub.v --- Subroutine instead of main program
  * -- was ../../draw.c,v 1.9 2000/03/17 17:13:12 maechler
 */
 #include <stdio.h>
 #include <math.h>
-#include <unistd.h>
+#ifndef Macintosh
+# include <unistd.h>
+#endif
 
 #include "vlmc.h"
 #include "vlmc_io.h"

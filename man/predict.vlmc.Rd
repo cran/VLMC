@@ -1,3 +1,4 @@
+% $Id: predict.vlmc.Rd,v 1.9 2002/11/25 17:29:25 maechler Exp $
 \name{predict.vlmc}
 \title{Prediction of VLMC for (new) Series}
 \description{
@@ -89,7 +90,7 @@
     }
     which has its own print method (\code{print.predict.vlmc}).}
 }
-\seealso{\code{\link{vlmc}}.}
+\seealso{\code{\link{vlmc}} and \link{residuals.vlmc}.}
 \examples{
 f1 <- c(1,0,0,0)
 f2 <- rep(1:0,2)

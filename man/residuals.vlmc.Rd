@@ -1,11 +1,11 @@
+% $Id: residuals.vlmc.Rd,v 1.10 2002/11/25 17:29:50 maechler Exp $
 \name{residuals.vlmc}
 \alias{residuals.vlmc}
 \title{Compute Residuals of a Fitted VLMC Object}
 \description{
   Compute residuals of a fitted \code{\link{vlmc}} object.
 
-%% FIXME
-  This is yet a matter of research may change in the future.
+  This is yet a matter of research and may change in the future.
 }
 \usage{
 \method{residuals}{vlmc}(object,
@@ -50,12 +50,14 @@
   For \code{type = "deviance"},
   \eqn{r_i = \pm\sqrt{-2\log(P_i)}}{r[i] = +- sqrt(-2 log(P[i]))}
   where \eqn{P_i}{P[i]} is the predicted probability for the i-th
-  observation which is the same as \eqn{p_{i,iy_i}}{p[i,iy[i]]} above.
+  observation which is the same as \eqn{p_{i,y_i}}{p[i,y[i]]} above (now
+  assuming \eqn{y_i \in \{1,2,\dots,m}{y[i] in \{1,2,...,m\}}).
   The sum of the squared deviance residuals \emph{is} the deviance of
   the fitted model.
 }
 \author{Martin Maechler}
-\seealso{\code{\link{vlmc}},\code{\link{deviance.vlmc}}}
+\seealso{\code{\link{vlmc}},\code{\link{deviance.vlmc}}, and
+  \code{\link{RCplot}} for a novel residual plot.}
 \examples{
 example(vlmc)
 rp <- residuals(vlmc.pres)

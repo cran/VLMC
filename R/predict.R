@@ -132,9 +132,8 @@ print.predict.vlmc  <- function(x, digits = getOption("digits"), ...)
        is.null(x$probs) || is.null(x$ID) || is.null(x$ctxt))
         stop("not a valid `predict.vlmc' object")
     Fprob <-
-        ## Not yet; need proper MASS and .rat() working with NA
-        ## >>> Use Martin's fixed fractions via symbolic link!
-        if(exists("fractions",mode="function") ##|| require(MASS)
+        ## MASS should be available, required in ./zzz.R
+        if(exists("fractions",mode="function") # am still defensive ..
            ) function(x) as.character(fractions(x))
         else
         function(x) format(x,digits=digits)

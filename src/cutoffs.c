@@ -8,7 +8,9 @@
 */
 
 #include <math.h>
-#include <unistd.h>
+#ifndef Macintosh
+# include <unistd.h>
+#endif
 
 #include "vlmc.h"
 #include "vlmc_io.h"

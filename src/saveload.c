@@ -45,7 +45,11 @@ void tree_size(node_t *node, int *size)
 } /* tree_size */
 
 void save_tree(node_t *node, int *SAFE, int *free_safe,
+#ifndef Macintosh
 	       const int size_safe, const int debug)
+#else
+	       int size_safe, int debug)
+#endif
 {
     /*	__Recursively__ write the VLMC subtree in node to SAFE[] vector.
      *

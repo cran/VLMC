@@ -1,3 +1,4 @@
+% $Id: draw.vlmc.Rd,v 1.7 2002/11/25 16:15:06 maechler Exp maechler $
 \name{draw.vlmc}
 \alias{draw.vlmc}
 \alias{draw}

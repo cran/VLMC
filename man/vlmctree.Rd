@@ -26,15 +26,18 @@ vlmctree(x)
   tree.
 
   \code{str.vtree} is a method for the generic \code{\link{str}}
-  function and typically for the output of \code{vlmctree()}.
+  function and typically for the output of \code{vlmctree()}. For each
+  node, it gives the ``parenting level'' in braces and the counts.
 }
 \value{
   A \code{\link{list}} of \code{\link{class}} \code{"vtree"}
-  representing the tree structure recursively,
-.
+  representing the tree structure recursively.
+
   Each ``node'' of the tree is itself a list with
   components
-  \item{level}{integer in \{0,1,\dots\}, the top-level is \code{0}.}
+  \item{level}{length-2 integer giving the level in \{0,1,\dots\},
+    counted from the root (which is \code{0}) and the parenting level,
+    i.e the longest branch.}
   \item{count}{integer vector of length \code{k} where \code{k} is the
     number of ``letters'' in the alphabet.}
   \item{total}{equals to \code{sum(* $ count)}.}

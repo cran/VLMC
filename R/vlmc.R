@@ -1,16 +1,16 @@
-#### $Id: vlmc.R,v 1.27 2002/03/13 10:50:38 maechler Exp $
-vlmc.version <- "VLMC 1.3-3;  after $Date: 2002/03/13 10:50:38 $ UTC"
+#### $Id: vlmc.R,v 1.28 2002/05/18 18:10:03 maechler Exp $
+vlmc.version <- "VLMC 1.3-4;  after $Date: 2002/05/18 18:10:03 $ UTC"
 ##		      ----- same as the one in ../DESCRIPTION !
 
 vlmc <-
 function(dts,
-         cutoff.prune =
-         	qchisq(alpha.c, df= max(0.1,alpha.len-1), lower.tail=FALSE)/2,
-         alpha.c = 0.05,
-         threshold.gen = 2,
-         y = TRUE, debug = FALSE, quiet = FALSE,
-         dump = 0, ctl.dump = c(width.ct = 1+log10(n), nmax.set = -1)
-         )
+	 cutoff.prune =
+		qchisq(alpha.c, df= max(0.1,alpha.len-1), lower.tail=FALSE)/2,
+	 alpha.c = 0.05,
+	 threshold.gen = 2,
+	 y = TRUE, debug = FALSE, quiet = FALSE,
+	 dump = 0, ctl.dump = c(width.ct = 1+log10(n), nmax.set = -1)
+	 )
 {
   ## Purpose: Fit a VLMC to a discrete time-serie
   ## ----------------------------------------------------------------------
@@ -34,11 +34,11 @@ function(dts,
   if(any(nchar(alphabet) > 1)) {
     alphabet <- abbreviate(alphabet, min=1)
     if(!quiet)
-        warning("alphabet with >1-letter strings; trying to abbreviate")
+	warning("alphabet with >1-letter strings; trying to abbreviate")
     if(any(nchar(alphabet) > 1))
       alphabet <-
-        if(alpha.len <= 10) as.character(ialph)
-        else letters[1:alpha.len]
+	if(alpha.len <= 10) as.character(ialph)
+	else letters[1:alpha.len]
   }
   Alpha <- paste(alphabet, collapse = "")
   if(debug)
@@ -48,9 +48,9 @@ function(dts,
   if(!all(ialph == idat)) {
     if(!is.null(xtraD <- setdiff(idat, ialph)))
       stop(paste("Data has 'letters' not in alphabet:",
-                 paste(xtraD,collapse=", ")))
+		 paste(xtraD,collapse=", ")))
     else
-        warning("alphabet is larger than set of values in Data")
+	warning("alphabet is larger than set of values in Data")
   }
 
   dump <- as.integer(dump[1])
@@ -59,40 +59,40 @@ function(dts,
     ctl.dump <- as.integer(ctl.dump)
     if(length(ctl.dump) != 2) stop("`ctl.dump' must be integer(2).")
     if(ctl.dump[2] < 1) # default -- FIXME : should depend also on cutoff..
-        ctl.dump[2] <- as.integer(max(6, 15 - log10(n)))
+	ctl.dump[2] <- as.integer(max(6, 15 - log10(n)))
     if(ctl.dump[1] < 0) stop("`ctl.dump[1]' must be non-negative.")
     ## Fixme : need even more consistency checks ..
   }
   if(debug) cat("vlmc: ctl.dump = ",ctl.dump,"\n")
 
   r <- .C("vlmc_p",
-          data   = Data,
-          n      = n,
-          threshold.gen= as.integer(threshold.gen),
-          cutoff.prune = as.double(cutoff.prune),
-          alpha.len    = as.integer(alpha.len),
-          alpha        = as.character(Alpha),
-          debug      = as.integer(as.logical(debug)),
-          dump.flags = as.integer(c(dump, ctl.dump)),
+	  data	 = Data,
+	  n	 = n,
+	  threshold.gen= as.integer(threshold.gen),
+	  cutoff.prune = as.double(cutoff.prune),
+	  alpha.len    = as.integer(alpha.len),
+	  alpha	       = as.character(Alpha),
+	  debug	     = as.integer(as.logical(debug)),
+	  dump.flags = as.integer(c(dump, ctl.dump)),
 
-          size = integer(4),
-          ## Not allowed because of character variable (alpha):
-          ## DUP = FALSE,
-          PACKAGE = "VLMC")
+	  size = integer(4),
+	  ## Not allowed because of character variable (alpha):
+	  ## DUP = FALSE,
+	  PACKAGE = "VLMC")
   ## Now that we know the size of the result, we can "give" the space,
   ## and put the result tree (as integer vector) into it:
   names(r$size) <- c("total","nr.leaves","context","ord.MC")
   r$size <- rev(r$size)
   rvec <- .C("getvlmc",
-             size = r$size["total"],
-             vlmc.vec = integer(r$size["total"]),
-             ##DUP = FALSE,
-             PACKAGE = "VLMC")$vlmc
+	     size = r$size["total"],
+	     vlmc.vec = integer(r$size["total"]),
+	     ##DUP = FALSE,
+	     PACKAGE = "VLMC")$vlmc
 
   ## Consistency checks (catch some programming errors):
   if(alpha.len != rvec[1])
       warning(paste(".C(\"vlmc\"..) : |alphabet| inconsistency:",
-                    alpha.len, "!=", rvec[1]))
+		    alpha.len, "!=", rvec[1]))
   r$vlmc.vec <- rvec
   if(y) r$y <- alphabet[1:1 + Data]
   r$data <- r$debug <- r$dump.flags <- NULL
@@ -117,7 +117,7 @@ print.vlmc <- function(x, digits = max(3, getOption("digits") - 3), ...)
       "', |alphabet| = ",x$alpha.len,
       ", n = ",x$n,".\nCall: ",deparse(x$call),
       if(!any(used.args %in% c("cutoff.prune","alpha.c")))
-      paste(";  default cutoff =", format(x$cutoff,digits=digits)),
+      paste(";	default cutoff =", format(x$cutoff,digits=digits)),
       ##";  |result| = ", length(vvec), ", MC order = ", x$size[4],
       "\n -> extensions (= $size ) :\n",sep="")
   print(x $ size)
@@ -141,10 +141,10 @@ summary.vlmc <- function(object, ...)
     p <- predict(object, type = "class")
     conf.tab <- table(data = object$y, predicted = p)
     structure(c(object,
-                list(confusion.table = conf.tab,
-                     depth.stats = summary(predict(object, type = "depth")[-1]),
-                     R2 = sum(diag(conf.tab))/object$n)),
-              class = c("summary.vlmc", class(object)))
+		list(confusion.table = conf.tab,
+		     depth.stats = summary(predict(object, type = "depth")[-1]),
+		     R2 = sum(diag(conf.tab))/object$n)),
+	      class = c("summary.vlmc", class(object)))
 }
 
 print.summary.vlmc <-
@@ -170,16 +170,16 @@ print.summary.vlmc <-
   if(vvec.printing) {
       vvec <- (x $ vlmc.vec)#.Alias
       if(vvec[1] != x$alpha.len)
-          stop("invalid vlmc structure {alpha.len}")
+	  stop("invalid vlmc structure {alpha.len}")
       if((lV <- length(vvec)) > 10000)
-          warning("|vvec| > 10000; not printing. Use `prt.vvec()' if you want")
+	  warning("|vvec| > 10000; not printing. Use `prt.vvec()' if you want")
       else {
-          cat("\ncontext tree encoding `vvec'tor:\n")
-          if(2*lV > getOption("expressions")) {
-              oop <- options(expressions = 2*lV)
-              on.exit(options(oop))
-          }
-          prt.vvec(vvec[-1], nalph = vvec[1])
+	  cat("\ncontext tree encoding `vvec'tor:\n")
+	  if(2*lV > getOption("expressions")) {
+	      oop <- options(expressions = 2*lV)
+	      on.exit(options(oop))
+	  }
+	  prt.vvec(vvec[-1], nalph = vvec[1])
       }
   }
 
@@ -204,69 +204,8 @@ prt.vvec <- function(v, nalph, pad = " ")
   else {
     i <- 1 + 1:nalph
     cat(if(v[1] != 0) "\n",
-        sapply(3*v[1], function(n)paste(character(n),collapse= pad)),
-        "{",v[1],"} [", paste(formatC(v[i],w=1),collapse=", "), "]", sep="")
+	sapply(3*v[1], function(n)paste(character(n),collapse= pad)),
+	"{",v[1],"} [", paste(formatC(v[i],w=1),collapse=", "), "]", sep="")
   }
   prt.vvec(v[-c(1,i)], nalph, pad = pad)
-}
-
-vlmctree <- function(x)
-{
-  ## Purpose: Compute the Tree representation of a "vlmc" object (as R list).
-  ## -------------------------------------------------------------------------
-  ## Arguments: x: a "vlmc" object {usually a fit from vlmc(..)}.
-  ## -------------------------------------------------------------------------
-  ## Author: Martin Maechler, Date:  1 Apr 2000, 18:02
-  if(!is.vlmc(x)) stop("first argument must be a \"vlmc\" object; see ?vlmc")
-  vvec <- (x $ vlmc.vec)#.Alias
-  k <- (x $ alpha.len)#.Alias
-  if(vvec[1] != k) stop("invalid vlmc structure {alpha.len}")
-
-  vtree <- .vvec2tree(vvec[-1], k = vvec[1], chk.lev = 0)
-}
-
-.vvec2tree <- function(vv, k, chk.lev)
-{
-  ## Purpose: RECURSIVELY construct tree from a vvec of a "vlmc" object
-  ##	      *not* using alphabet, (just k = |alphabet|).
-  ## Do as load_tree(.)  {in ../src/io.c }
-  ## -------------------------------------------------------------------------
-  ## Author: Martin Maechler, Date:  1 Apr 2000, 18:11
-
-  if((lev <- vv[1]) >= 0) { ## non-end
-      if(lev != chk.lev)
-          stop(paste("malformed vlmc tree at level",chk.lev))
-
-      ii <- 1:k
-      node <- list(level = lev, count = vv[1 + ii], child = vector("list", k))
-      node $ total <- sum(node $ count)
-
-      vv <- vv[ - c(ii, k+1)]# the first 1..(k+1) ones
-      for(i in ii) {
-          r <- .vvec2tree(vv, k=k, chk.lev = chk.lev+1)
-          if(!is.null(r)) {
-              vv <- r[[2]]
-              node$child[[i]] <- r[[1]]
-          } else vv <- vv[-1] ## child[i] remains NULL
-      }
-      if(all(sapply(node$child, is.null))) ## this is a leaf
-          node$child <- NULL
-      if(chk.lev > 0) list(node, vv) else { class(node) <- "vtree";  node }
-  }
-  ## else return NULL
-}
-
-str.vtree <- function(object, ...)
-{
-    ## Purpose: str method for "vtree" lists  [[recursive]]
-    if(!is.null(object$level)) {
-        nch <- length(object$child)
-        cat(if(object$level)
-            paste(rep(" ", object$level+1), collapse="..") else "`vtree':\n",
-            format(object$count),"|", object$total, "; ",
-            if(nch) paste(nch,"children") else "_leaf_",
-            "\n")
-        for(ch in object$child)
-            str.vtree(ch)
-    }
 }

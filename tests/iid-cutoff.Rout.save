@@ -1,6 +1,6 @@
 
-R : Copyright 2002, The R Development Core Team
-Version 1.5.0 Under development (unstable) (2002-04-08)
+R : Copyright 2003, The R Development Core Team
+Version 1.8.0 Under development (unstable) (2003-07-09)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -15,26 +15,28 @@ Type `q()' to quit R.
 
 > #### --- Choose cutoff such that  i.i.d. re-sample gives MC(0)
 > library(VLMC)
-Loading required package: MASS
-
+Loading required package: MASS 
 > data(OZrain)
 > .proctime00 <- proc.time()
->
+> 
 > rain4c <- cut(OZrain, c(-.1, 0.5, 18.5, 50.1, 1000))
 > table(rain4c <- as.integer(rain4c) - 1:1)
 
-   0    1    2    3
-2237  713  356  347
->
+   0    1    2    3 
+2237  713  356  347 
+> 
 > fff <- function(x){
 +     f <- (s <- vlmc(sr4, cut = x)$size)["ord.MC"]
 +     cat(formatC(x,wid=15)," :  ", formatC(f,wid=2),
 +         " (",formatC(s["total"],wid=5),")\n", sep="")
 +     f - 0.01
 + }
->
+> 
 > N <- 64# had 200
 > r <- matrix(NA, 4, N)
+> if(R.version$major != "1" || as.numeric(R.version$minor) >= 7) RNGversion("1.6")
+Warning message: 
+Buggy version of Kinderman-Ramage generator used. in: RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") 
 > set.seed(6352)
 > for(i in 1:N) {
 +     sr4 <- sample(rain4c)
@@ -1451,14 +1453,14 @@ Loading required package: MASS
 [63,] 6.640212         -0.01   15 0.009012064
 [64,] 5.027303         -0.01   17 0.006243815
 > summary( r["root",]) # astonishingly wide; Q1--Q3 =  5.41--6.64
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
-  4.254   5.172   5.888   6.093   6.527   9.428
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  4.254   5.172   5.888   6.093   6.527   9.428 
 > sqrt(var(r["root",]))/ sqrt(N)
 [1] 0.1401093
->
+> 
 > hist(r["root",])
->
+> 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  39.29 0.56 44.51 0 0
->
+Time elapsed:  23.95 0.49 24.55 0 0 
+> 

@@ -6,11 +6,6 @@
 	 M|arkov
 	 C|hains
 
-
- >>>>>>>>> THIS IS STILL an UNOFFICIAL (Beta) Release!          <<<<<<<<<<<
- >>>>>>>>> Please do not distribute, but refer to me by E-mail  <<<<<<<<<<<
- >>>>>>>>>    Martin Maechler <maechler@stat.math.ethz.ch>      <<<<<<<<<<<
-
 ------------------------------------------------------------------------------
 
   Copyright (C) 2000-2002 Martin Maechler
@@ -29,10 +24,6 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
-The functions  fractions() and rational() are from the MASS package of
-Venables & Ripley and copyrighted by them.
-
 ------------------------------------------------------------------------------
 
 	INSTALLATION
@@ -49,10 +40,10 @@ The official ``package database'' is in file ./DESCRIPTION
 
 NOTES:
 
-o I'm glad for suggestions and bug reports.
-  Please do *NOT* distribute this, since it is still in beta state.
+- I'm glad for suggestions and bug reports.
+- See the file ./TODO  for my own ideas on improvement
 
 Martin Maechler <maechler@stat.math.ethz.ch>	http://stat.ethz.ch/~maechler/
-Seminar fuer Statistik, ETH-Zentrum  LEO D10	Leonhardstr. 27
+Seminar fuer Statistik, ETH-Zentrum  LEO C16	Leonhardstr. 27
 ETH (Federal Inst. Technology)	8092 Zurich	SWITZERLAND
 phone: x-41-1-632-3408		fax: ...-1228			<><

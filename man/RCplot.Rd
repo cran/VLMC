@@ -7,7 +7,7 @@
 
   This has proven to be useful function, and the many optional arguments
   allow quite a bit of customization.  However, the current
-  implementation is somewhat experimentl and the defaults have been
+  implementation is somewhat experimental and the defaults have been
   chosen from only a few examples.
 }
 \usage{
@@ -52,9 +52,9 @@ RCplot(x, r2 = residuals(x, "deviance")^2,
   \item{rp}{a list as resulting from the above call to \code{plot.factor()}.}
 }
 \references{
-  Mächler M. and Bühlmann P. (2002)
+  Mächler M. and Bühlmann P. (2003)
   Variable Length Markov Chains: Methodology, Computing and Software.
-  submitted.
+  accepted for publication in \emph{J\. Computational and Graphical Statistics}.
 }
 \author{Martin Maechler}
 \seealso{\code{\link{summary.vlmc}} for other properties of a VLMC model.}

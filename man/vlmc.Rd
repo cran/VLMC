@@ -1,3 +1,4 @@
+% $Id: vlmc.Rd,v 1.10 2003/07/09 08:16:05 maechler Exp $
 \name{vlmc}
 \title{Fit a Variable Length Markov Chain (VLMC)}
 \alias{vlmc}
@@ -48,7 +49,7 @@ is.vlmc(x)
     number of set elements that are printed per node; when the latter is
     not positive (by default), currently \code{max(6, 15 - log10(n))} is used.}
 %
-  \item{x,object}{a fitted \code{"vlmc"} object.}
+  \item{x}{a fitted \code{"vlmc"} object.}
   \item{digits}{integer giving the number of significant digits for
     printing numbers.}
   \item{\dots}{potentially further arguments [Generic].}
@@ -88,7 +89,11 @@ is.vlmc(x)
   Variable Length Markov Chains.
   \emph{Annals of Statistics} \bold{27}, 480--513.
 
-  Maechler M. (2002)
+  Mächler M. and Bühlmann P. (2003)
+  Variable Length Markov Chains: Methodology, Computing and Software.
+  accepted for publication in \emph{J\. Computational and Graphical Statistics}.
+
+  Mächler M. (2003)
   VLMC --- Implementation and \R interface; working paper.
   %%Journal of Statistical Software, \emph{not yet submitted}.
 }
