@@ -77,7 +77,7 @@ str.vtree <- function(object, ...)
 ###- as.dendrogram() method - in order to plot the context - tree
 
 ## Generic and hclust method are in
-##  ~/R/D/r-devel/R/src/library/mva/R/dendrogram.R
+##  ~/R/D/r-devel/R/src/library/stats/R/dendrogram.R
 
 ### FIXME:
 ### =====

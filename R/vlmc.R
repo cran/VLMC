@@ -1,5 +1,5 @@
-#### $Id: vlmc.R,v 1.30 2003/12/17 12:46:27 maechler Exp $
-vlmc.version <- "VLMC 1.3-6;  after $Date: 2003/12/17 12:46:27 $ UTC"
+#### $Id: vlmc.R,v 1.31 2004/05/05 16:41:47 maechler Exp $
+vlmc.version <- "VLMC 1.3-7;  after $Date: 2004/05/05 16:41:47 $ UTC"
 ##		      ----- same as the one in ../DESCRIPTION !
 
 vlmc <-

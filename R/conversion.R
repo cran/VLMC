@@ -1,6 +1,6 @@
 ### How can I make functions from a package share a common utility ?
-### This fails (functions do not end in package) :
-##  local({ ss <- function(x) strsplit(x,NULL)[[1]]
+###  ==> use a NAMESPACE !
+##   ss <- function(x) strsplit(x,NULL)[[1]]
 
 int2alpha <- function(i, alpha)
 {

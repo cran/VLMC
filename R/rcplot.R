@@ -1,3 +1,4 @@
+
 RCplot <-
     function(x, r2 = residuals(x, "deviance")^2,
              alphabet = x$alpha, lab.horiz = k <= 20, do.call = TRUE,
@@ -10,7 +11,12 @@ RCplot <-
     ## Author: Martin Maechler, Date:  1 Mar 2002, 17:39
     namx <- deparse(substitute(x))
     if(!is.vlmc(x)) stop("`x' must be a fitted VLMC object")
-    fID <- as.factor(id2ctxt(predict(x, type="id"), alpha = alphabet))
+    fID <- id2ctxt(predict(x, type="id"), alpha = alphabet)
+    ok <- fID != "NA"
+    ## drop those with "NA" context (at least the first one!)
+    ## FIXME: should we tell about this ?
+    fID <- as.factor(fID[ok])
+    r2 <- r2[ok]
     tfID <- table(fID)
     k <- length(tfID)
     if(is.null(main))
@@ -25,6 +31,7 @@ RCplot <-
     }
     op <- par(cex.axis = cex.axis)
     on.exit(par(op))
+    ## plot.factor calling (and returning) boxplot():
     rp <- plot(fID, r2, varwidth = TRUE, xlab = xlab, main = main,
                ylab = paste("residuals(",namx,", \"deviance\") ^ 2", sep=""),
                ylim = ylim, col = col, las = if(lab.horiz) 0 else 2, ...)

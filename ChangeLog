@@ -1,3 +1,10 @@
+2004-05-05  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version, Date): 1.3-7
+
+	* R/rcplot.R (RCplot): new boxplot() NA behavior -> need to drop
+		NAs myself.
+
 2003-12-17  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version, Date): 1.3-6 - released
