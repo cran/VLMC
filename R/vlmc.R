@@ -1,5 +1,5 @@
-#### $Id: vlmc.R,v 1.28 2002/05/18 18:10:03 maechler Exp $
-vlmc.version <- "VLMC 1.3-4;  after $Date: 2002/05/18 18:10:03 $ UTC"
+#### $Id: vlmc.R,v 1.29 2003/09/08 18:36:35 maechler Exp $
+vlmc.version <- "VLMC 1.3-5;  after $Date: 2003/09/08 18:36:35 $ UTC"
 ##		      ----- same as the one in ../DESCRIPTION !
 
 vlmc <-
@@ -8,6 +8,7 @@ function(dts,
 		qchisq(alpha.c, df= max(0.1,alpha.len-1), lower.tail=FALSE)/2,
 	 alpha.c = 0.05,
 	 threshold.gen = 2,
+         code1char = TRUE,
 	 y = TRUE, debug = FALSE, quiet = FALSE,
 	 dump = 0, ctl.dump = c(width.ct = 1+log10(n), nmax.set = -1)
 	 )
@@ -19,22 +20,26 @@ function(dts,
   ## Author: Martin Mächler, Date: 17 Mar 2000
 
   cl <- match.call()
+  if(!is.atomic(dts))
+      stop("vlmc() only works on vectors (integer, character, factor)")
   if(is.character(dts)) {
     if(!all(i1 <- (1 == (nc <- nchar(dts)))))
-      stop("character argument must have *all* 1-character strings")
+        ## FIXME, change this to a `note()'!
+      warning("character argument has elements of more than 1 character")
   }
   ## common format: factor w/ levels =^= alphabet
   n <- length(f.dts <- as.factor(dts))
   Data <- as.integer(f.dts) - 1:1 #-> is integer in {0,1,...}
   alphabet <- levels(f.dts)# possibly unsorted!
   alpha.len <- length(alphabet)
+  ## FIXME
   if(alpha.len > length(LETTERS))
     stop("alphabet too large; currently limited to maximally 26 letters")
   ialph <- 0:(alpha.len - 1)
-  if(any(nchar(alphabet) > 1)) {
-    alphabet <- abbreviate(alphabet, min=1)
+  if(code1char && any(nchar(alphabet) > 1)) {
     if(!quiet)
 	warning("alphabet with >1-letter strings; trying to abbreviate")
+    alphabet <- abbreviate(alphabet, min=1)
     if(any(nchar(alphabet) > 1))
       alphabet <-
 	if(alpha.len <= 10) as.character(ialph)
@@ -49,8 +54,8 @@ function(dts,
     if(!is.null(xtraD <- setdiff(idat, ialph)))
       stop(paste("Data has 'letters' not in alphabet:",
 		 paste(xtraD,collapse=", ")))
-    else
-	warning("alphabet is larger than set of values in Data")
+    else if(!quiet)
+        warning("alphabet is larger than set of values in Data")
   }
 
   dump <- as.integer(dump[1])

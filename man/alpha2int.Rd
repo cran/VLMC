@@ -26,7 +26,7 @@ int2alpha(i, alpha)
 \seealso{\code{\link{vlmc}}, and
   \code{\link{int2char}()} and its inverse, \code{\link{char2int}()},
   both working with multi-character strings instead of vectors of single
-  characters.
+  characters; further, \code{\link{alphabet}}.
 }
 \examples{
 alphabet <- "abcdefghijk"
@@ -34,4 +34,5 @@ alphabet <- "abcdefghijk"
 (ic <- alpha2int(ch, alphabet))
 stopifnot(int2alpha(ic, alphabet) == ch)
 }
+\keyword{character}
 \keyword{utilities}

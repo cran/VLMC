@@ -21,7 +21,7 @@ simulate.vlmc(x, n, n.start = 64 * x$size["context"], integer.return=FALSE)
 
   Note that if you want to simulate from a given start sequence
   \code{x0}, you'd use \code{\link{predict.vlmc}(x, x0, type= "response")}
-  --- actually not quiet yet.
+  --- actually not quite yet.
 }
 \value{
   A vector of length \code{n}.  Either \code{\link{integer}} or
@@ -29,7 +29,7 @@ simulate.vlmc(x, n, n.start = 64 * x$size["context"], integer.return=FALSE)
   argument, see above.
 }
 \author{Martin Maechler}
-\seealso{\code{\link{vlmc}}.}
+\seealso{\code{\link{vlmc}} and \code{\link{predict.vlmc}}.}
 \examples{
 example(vlmc)
 

@@ -1,0 +1,39 @@
+Things that were in ./TODO some time
+------------------- ====== ---------
+
+3. require(MASS)  instead of having its fractions() code here -- done 2002-03-06
+
+4. squish the {rare} deviance() <-> resid(*, type="dev") bug  -- done 2002-02-08
+
+5. Get rid of attr(*, "flags") for predict and residuals.     -- done 2002-03-06
+   Keep flags only in  predict(*, "ALL") !!
+
+
+-- R_alloc or Calloc					Done
+
+-- "size.result" argument of  vlmc() :			Done
+   Rather use two calls to .C(.),
+   the first returning the required size
+   (and saving the object using Calloc()).
+
+-- Not yet for R/S:					almost Done
+	- the flag option of "draw",
+	- draw2
+	- draw3
+
+
+For paper :
+
+0) "Cardinality" CC(.) of fitted VLMC
+   {{ ==?== (length(alphabet) - 1) * $size["context"] }}
+
+1) -> AIC/BIC  =  2* log(\hat P) +  alpha * CC(\hat P)
+
+   {which alpha}
+
+2) Simulation for model selection, using [AB]IC,
+   plus "Crossvalidation" etc
+
+3) Residual analysis (graphical)
+
+

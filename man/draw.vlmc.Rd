@@ -1,4 +1,4 @@
-% $Id: draw.vlmc.Rd,v 1.7 2002/11/25 16:15:06 maechler Exp maechler $
+% $Id: draw.vlmc.Rd,v 1.8 2003/10/02 10:13:04 maechler Exp $
 \name{draw.vlmc}
 \alias{draw.vlmc}
 \alias{draw}
@@ -10,7 +10,7 @@
 }
 \usage{
 draw(x, \dots)
-draw.vlmc(x, kind=3, flag = TRUE, show.hidden = 1,
+draw.vlmc(x, kind=3, flag = TRUE, show.hidden = 0,
           cumulative = TRUE, delta = cumulative, debug = FALSE, \dots)
 }
 \arguments{

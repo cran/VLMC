@@ -36,4 +36,5 @@ char2int("vlmc", paste(letters, collapse=""))
 int2char(c(0:3, 3:1), "abcd")
 int2char(c(1:0,3,3), "abc") # to eat ;-)
 }
+\keyword{character}
 \keyword{utilities}

@@ -1,4 +1,4 @@
-Notes mostly to myself	{Martin Mächler}
+ Notes mostly to myself	{Martin Mächler}
 ----------------------------------------
 
 1. `bug' (not really : just needs large options(expression = 20000)
@@ -11,13 +11,69 @@ Notes mostly to myself	{Martin Mächler}
 2. *do* write
      as.dendrogram.vlmc()  and  then  plot.vlmc() from it
 
+   -- partly done: want "hang = 1" argument (we now do +-  "hang = -1").
 
-3. require(MASS)  instead of having its fractions() code here -- done 2002-03-06
-
-4. squish the {rare} deviance() <-> resid(*, type="dev") bug  -- done 2002-02-08
-
-5. Get rid of attr(*, "flags") for predict and residuals.     -- done 2002-03-06
-   Keep flags only in  predict(*, "ALL") !!
 
 6. do AIC cutoff search internally -- or at least returning all
    cutoffs (+ df + loglik ?) where pruning happens.
+
+7. Eliminate the maximum alphabet size of 26
+   --> src/vlmc.h : max_alpha_len (now 27)  :
+      but even better have no fixed size this will make the   struct _node
+      much smaller for e.g.the binary case!
+   also '27%s' in src/io.c  -- here and other places rely on alphabet of
+   only 1 character  (-> allows 255 different ones).
+   Better: arbitrary alphabet; keep the alphabet 'vector' (in R sense, can
+   have more than one letter) in one place.
+
+8. Allow to update an already fitted vlmc
+   by additionally fitting a new discrete time series.
+   If you can do this, apply this to allow input of a list of time series
+   (for fitting **one** VLMC).
+
+   This should be pretty straight forward, apart from the first few cases
+   that have no full context
+
+9. Multivariate VLMC --- new modeling
+
+10. Simulation for model selection, using [AB]IC, plus "Crossvalidation" etc
+    --> provide user functions (? or use library(boot) ?
+
+
+
+-- vlmc(.. dump =TRUE) and (.. debug = TRUE) should probably NOT use
+   std.error, but rather stdout.
+
+
+----------
+
+
+predict.vlmc( method = "prob") :
+	      First row, give the marginal (estimated, i.e. empirical)
+	      probabilities, instead of NAs.
+
+	      --> hence also for "class" etc (instead of NA)
+
+=== predict.vlmc() should allow longer output than input for
+    "prediction into the future". --- pretty easy
+
+---------
+
+A. Fit one VLMC using several/many "parallel" series
+
+   definite need; not too hard to program!
+   {cheap trick: concatenate these and pad with NA!? -- fails too}
+
+   ==> See more in ./multi-vlmc.R
+		   ~~~~~~~~~~~~~~
+
+
+B. Fit a "multivariate" VLMC:
+
+   Martin's 1st idea: = univariate series in product space.
+   Drawbacks:
+        - Past is the same length for all series
+	  (x1_t may need more looking back of x1 than of x2)
+	- Product space is quickly too large  (K ^ p), and quite a few of
+	  these states may not appear in data --> not in fitted values.
+	  If we'd predict univariately, new multi-states could appear

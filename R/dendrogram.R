@@ -81,53 +81,69 @@ str.vtree <- function(object, ...)
 
 ### FIXME:
 ### =====
-## 1) Add "midpoint" such that I can plot with center = FALSE
-## 2) Allow "height" of leave to be  parent_height -1 !
+
+## (*) Add "midpoint" such that I can plot with center = FALSE
+##     (I *can* plot, but it's not okay;   center = TRUE is okay)
+
+## CONSIDER:  Make this a new class *inheriting* from dendrogram
+##            The new class would have its own print and plot method...
+
 as.dendrogram.vlmc <- function(object, ...)
 {
     if(!is.vlmc(object))
         stop("first argument must be a \"vlmc\" object; see ?vlmc")
     vvec <- (object $ vlmc.vec)#.Alias
-    k <- (object $ alpha.len)#.Alias
+    k <- object $ alpha.len
     if(vvec[1] != k) stop("invalid vlmc structure {alpha.len}")
+    p <- unname(object $ size["ord.MC"]) # maximal MC order
+    abc <- alphabet(object)
 
     vv2dendro <- function(vv, cl.lev)
     {
-        ## workhorse (recursive!)
+        ## construct the nested list, level `cl.lev' from `vvec' -- recursively!
         if((lev <- vv[1]) >= 0) { ## non-end
             if(lev != cl.lev)
                 stop(paste("malformed vlmc tree at level",cl.lev))
 
             ii <- 1:k
-            node <- vector("list", k)
-            count <- vv[1 + ii]
-            vv <- vv[ - c(ii, k+1)]     # the first 1..(k+1) ones
-            for(i in ii) { ## extract child[i]
+            node <- vector("list", k)   # k children
+            names(node) <- 0:(k-1)
+            count <- vv[1 + ii] 	# and their counts
+            vv <- vv[ - c(ii, k+1)]     # drop the first 1..(k+1) ones
+            for(i in ii) { ## extract child[i] (and *its* children)
                 r <- vv2dendro(vv, cl.lev = cl.lev+1)
+                ## downdating `vv',  updating node[[i]]:
                 vv <-
                     if(!is.null(r)) {
                         node[[i]] <- r[[1]]
+                        attr(node[[i]], "edgetext") <- abc[i]
+
                         r[[2]]
-                    } else ## empty child[i]; drop node[[i]] (NULL) later
-                vv[-1]
+                    }
+                    else ## empty child[i]; drop NULL node[[i]] below
+                        vv[-1]
             }
             ##- cat("lev=",lev,";", "count=",count,"  vv : \n"); str(vv)
-            if(all(sapply(node, is.null))) { ## this is a leaf
+            if(all(kids0 <- sapply(node, is.null))) { ## this is a leaf
                 node <- sum(count)
-                attr(node,"height") <- 0:0
                 attr(node,"members") <- 1:1
-            } else {
-                ## drop the NULL children:
-                node <- node[sapply(node,function(n)!is.null(n))]
-                attr(node,"height") <- ## parent level :
-                    1:1 + max(sapply(node, function(n) attr(n,"height")))
+                attr(node,"leaf") <- TRUE
+            }
+            else { ## has at least one child;
+                node[kids0] <- NULL ## drop the NULL ones (but remember which!)
+                attr(node,"0-kids") <- (0:(k-1))[kids0]
+                ## attr(node,"height") <- ## parent level :
+                ##    1:1 + max(sapply(node, function(n) attr(n,"height")))
                 attr(node,"members") <- ## parent level :
                     sum(sapply(node, function(n) attr(n,"members")))
             }
+            attr(node,"height") <- p - lev
+            ## keep the full count[] :
+            attr(node,"count") <- count
 
             list(node, vv)
         }
-        ## else lev = -1 :  return NULL
+        ## else vv[1] = -1 :  return NULL
     }
 
     r <- vv2dendro(vvec[-1], 0)[[1]]

@@ -6,19 +6,18 @@
 \alias{is.vlmc}
 \description{
   Fit a Variable Length Markov Chain (VLMC) to a discrete time series,
-  in basically two steps:
-  First a large Markov Chain is
-  generated containing (all if \code{threshold.gen = 1}) the context states
-  of the time series.
-  In the second step, many states of the MC are collapsed by
-  \emph{pruning} the corresponding context tree.
+  in basically two steps:\cr
+  First a large Markov Chain is generated containing (all if
+  \code{threshold.gen = 1}) the context states of the time series.  In
+  the second step, many states of the MC are collapsed by \emph{pruning}
+  the corresponding context tree.
 }
 \usage{
 vlmc(dts,
      cutoff.prune = qchisq(alpha.c, df=max(.1,alpha.len-1),lower.tail=FALSE)/2,
      alpha.c = 0.05,
      threshold.gen = 2,
-     y = TRUE, debug = FALSE, quiet = FALSE,
+     code1char = TRUE, y = TRUE, debug = FALSE, quiet = FALSE,
      dump = 0, ctl.dump = c(width.ct = 1+log10(n), nmax.set = -1) )
 
 is.vlmc(x)
@@ -34,6 +33,8 @@ is.vlmc(x)
   \item{threshold.gen}{integer \code{>= 1} (usually left at 2).  When
     \emph{generating} the initial large tree, only generate nodes with
     \code{count >= threshold.gen}.}
+  \item{code1char}{logical; if true (default), the data \code{dts} will
+    be ..........FIXME...........}
   \item{y}{logical; if true (default), the data \code{dts} will be
     returned.  This allows to ensure that residuals
     (\code{\link{residuals.vlmc}}) and ``k-step ahead'' predictions can
@@ -91,7 +92,7 @@ is.vlmc(x)
 
   Mächler M. and Bühlmann P. (2003)
   Variable Length Markov Chains: Methodology, Computing and Software.
-  accepted for publication in \emph{J\. Computational and Graphical Statistics}.
+  accepted for publication in \emph{J. Computational and Graphical Statistics}.
 
   Mächler M. (2003)
   VLMC --- Implementation and \R interface; working paper.

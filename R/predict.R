@@ -1,4 +1,4 @@
-#### $Id: predict.R,v 1.10 2002/02/08 17:57:39 maechler Exp $
+#### $Id: predict.R,v 1.11 2003/09/08 18:35:57 maechler Exp $
 predict.vlmc <-
 function(object, newdata,
          type = c("probs", "class","response", "id.node", "depth", "ALL"),
