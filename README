@@ -1,0 +1,58 @@
+
+  An R (http://www.R-project.org/) Package for
+
+	 V|ariable
+	 L|ength
+	 M|arkov
+	 C|hains
+
+
+ >>>>>>>>> THIS IS STILL an UNOFFICIAL (Beta) Release!          <<<<<<<<<<<
+ >>>>>>>>> Please do not distribute, but refer to me by E-mail  <<<<<<<<<<<
+ >>>>>>>>>    Martin Maechler <maechler@stat.math.ethz.ch>      <<<<<<<<<<<
+
+------------------------------------------------------------------------------
+
+  Copyright (C) 2000-2002 Martin Maechler
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+The functions  fractions() and rational() are from the MASS package of
+Venables & Ripley and copyrighted by them.
+
+------------------------------------------------------------------------------
+
+	INSTALLATION
+	------------
+
+Type `help(INSTALL)' or `help(install.packages)' in R for
+information on how to install packages in R.
+
+See also http://www.R-project.org/ and http://cran.r-project.org/ [-> FAQ]
+
+------------------------------------------------------------------------------
+
+The official ``package database'' is in file ./DESCRIPTION
+
+NOTES:
+
+o I'm glad for suggestions and bug reports.
+  Please do *NOT* distribute this, since it is still in beta state.
+
+Martin Maechler <maechler@stat.math.ethz.ch>	http://stat.ethz.ch/~maechler/
+Seminar fuer Statistik, ETH-Zentrum  LEO D10	Leonhardstr. 27
+ETH (Federal Inst. Technology)	8092 Zurich	SWITZERLAND
+phone: x-41-1-632-3408		fax: ...-1228			<><

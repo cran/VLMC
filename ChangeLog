@@ -1,0 +1,159 @@
+2002-03-11  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* Version 1.3-2 ---> CRAN
+
+	* tests/pred-vlmc.R: `TRUE', not `T'
+
+	* tests/iid-cutoff.R: use smaller N (save CPU)
+
+2002-03-08  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* tests/pred-vlmc.R: oops! remove ancient write stuff to MM's files
+
+2002-03-06  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* man/vlmc.Rd: removed extraneous usage \method{summary}{vlmc}(.....)
+
+	* tests/pred-vlmc.Rout.save: oops -- forgot update for "no flags" below
+
+	* DESCRIPTION (Version): 1.3-2 ---> CRAN
+
+
+2002-03-06  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/predict.R (predict.vlmc): no more "flags" attribute for "probs"
+
+	* R/zzz.R (.First.lib): require MASS & get rid of these functions here.
+
+	* INDEX: updated manually (comparing w automatic)
+
+	* man/bnrf1.Rd: longer title
+
+	* tests/pred-vlmc.R: don't show vlmc.version
+
+	* DESCRIPTION (Version): 1.3-1
+
+
+2002-03-04  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/rcplot.R (RCplot): new function
+
+2002-02-08  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/vlmc.R (print.summary.vlmc, summary.vlmc): nicer depth summary
+
+2002-02-08   Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.3-0
+
+	* src/fitvlmc.c:
+	(vlmc): IMPORTANT change : discount the first observation from the
+		top-level counts! ==> correct Loglik/entropy and probs
+        --- results should change only when the toplevel-node is
+	"internal/hidden", i.e. not full, i.e. has ``lumped children''.
+
+2002-02-05  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/vlmc.R (summmary.vlmc): now also return (and print) the
+	``depth statistics''
+
+2002-02-04  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* man/predict.vlmc.Rd: typo +..
+
+2002-01-30  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* man/summary.vlmc.Rd: new file.
+
+	* R/vlmc.R (summary.vlmc): return object.
+	(print.summary.vlmc): new function; cleaner output; vvec.printing=FALSE.
+
+2001-11-09  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.2-1  {not yet debugged}
+
+	* man/predict.vlmc.Rd: new fitted.vlmc()
+	* R/predict.R: (ditto), and define type = "classwise" residuals
+	* man/residuals.vlmc.Rd:
+
+	* man/OZrain.Rd: work around plot.ts bug in R <= 1.3.1
+
+	* R/vlmc.R: print.vlmc(): also show `n'
+
+2001-10-29  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* man/int2char.Rd: see also each other
+	* man/alpha2int.Rd:
+
+2001-10-22  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/predict.R: fix in factor conversion (previously affected cases where
+	newdata did not contain all levels, or had levels in different order).
+	* man/predict.vlmc.Rd: and *.R: type = "class" now gives factor.
+
+2001-10-02  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Versionnote): 1.2-0 "released"
+
+	* tests/pred-vlmc.R: new test (from MM's ../R-ex/ )
+
+	* R/vlmc.R: eliminated check.memory option
+
+
+2001-10-01  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* tests/iid-cutoff.R: new test-example
+	* src/prune.c: found and plugged the memory leak -- hooray!
+
+2001-09-28  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+        * R/sim.R: new `n.start' argument; change `length.new' to `n'
+
+	* data/OZrain.R: New dataset (Daily rainfalls in Melbourne)
+	* man/OZrain.Rd:
+
+2001-09-24  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/vlmc.R: new `alpha.c' argument for specifying an alpha for qchisq
+	  instead of cutoff.prune
+
+	* man/AIC.vlmc.Rd is no longer needed (from R 1.4.x) because
+	  AIC.default() will work via logLik.vlmc()
+
+2001-04-27  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.1-6   [for a private release]
+
+2001-03-09  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* man/id2ctxt.Rd:  new
+	* man/int2char.Rd: new
+	* more help file improvements
+
+	* R/entropy.R: AIC(object, ... , k = 2)  for nlme (and some MASS)
+	compatibility
+
+2001-03-08  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.1-5
+
+	* data/bnrf1.R: Added example data, namely two DNA sequences.
+
+	* man/vlmc.Rd: fix reference
+	* make-dvi-Reference: Small script for the reference manual
+
+2001-02-08  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.1-4
+
+	* R/vlmc.R: add AIC to print() {and hence summary} output
+
+2001-01-10  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.1-3
+
+	* README: new file
+
+	* man/AIC.vlmc.Rd: new
+	* R/entropy.R: AIC()
+

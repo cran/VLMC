@@ -1,0 +1,23 @@
+Notes mostly to myself	{Martin Mächler}
+----------------------------------------
+
+1. `bug' (not really : just needs large options(expression = 20000)
+    prt.vvec  {but that's an experimental function}
+
+  look at
+     example(summary.vlmc)
+     print(svb, vvec.p = TRUE)
+
+2. *do* write
+     as.dendrogram.vlmc()  and  then  plot.vlmc() from it
+
+
+3. require(MASS)  instead of having its fractions() code here -- done 2002-03-06
+
+4. squish the {rare} deviance() <-> resid(*, type="dev") bug  -- done 2002-02-08
+
+5. Get rid of attr(*, "flags") for predict and residuals.     -- done 2002-03-06
+   Keep flags only in  predict(*, "ALL") !!
+
+6. do AIC cutoff search internally -- or at least returning all
+   cutoffs (+ df + loglik ?) where pruning happens.

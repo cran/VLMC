@@ -1,0 +1,35 @@
+#!/bin/sh
+# propagate the current version number from ./DESCRIPTION to
+# vlmc.version in  R/vlmc.R
+# *and* to the example output of man/vlmc.version.Rd !
+#
+Vfile=R/vlmc.R
+Manfile=man/vlmc.version.Rd
+#
+VER=`sed -n '/^Version: */s///p' DESCRIPTION`
+Vfv=`sed -n '/^vlmc\.version <- */s///p' $Vfile`
+Vfn=`echo $Vfv| sed 's/"VLMC *//; s/;.*//'`
+echo "Version: '$VER' "; echo "vlmc.version: ${Vfv}"
+
+if [ $VER != $Vfn ]
+then
+    echo "editing $Vfile"
+    sed /^vlmc\.version/s/$Vfn/$VER/ $Vfile > $Vfile$$
+    mv $Vfile $Vfile.bak
+    cp -p $Vfile$$ $Vfile
+    ci -u -m'automatic version update' $Vfile
+else
+    echo "$Vfile has correct version: $Vfv"
+fi
+vOut=`echo "source('${Vfile}'); vlmc.version" | R --quiet --vanilla|sed -n 2p`
+echo "  -- (new) Out= ${vOut}"
+
+Vfv=`sed -n '/^\[1\]/p' $Manfile`
+echo "Manfile: '$Vfv' "
+## Replace that line by vOut -- even unconditionally
+## but that's not so easy: $vOut contains ` " ' and spaces !
+#perl -pi.bak -e "'if (/^\[1\].*/) { s//$vOut/; }'" $Manfile
+##
+##--> solution replace this whole sh script by a perl one !!
+echo ''; echo "maybe MANUALLY REPLACE in $Manfile the line";
+echo "$Vfv"; echo "	  by the line" ; echo "$vOut"

@@ -1,0 +1,103 @@
+
+R : Copyright 2002, The R Development Core Team
+Version 1.5.0 Under development (unstable) (2002-03-04)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type `license()' or `licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type `contributors()' for more information.
+
+Type `demo()' for some demos, `help()' for on-line help, or
+`help.start()' for a HTML browser interface to help.
+Type `q()' to quit R.
+
+> .proctime00 <- proc.time()
+> require(VLMC)
+Loading required package: VLMC 
+Loading required package: mva 
+[1] TRUE
+> 
+> ## Currently, there's also an extensive AIC example in
+> ## ../man/OZrain.Rd, i.e.  example(OZrain)
+> 
+> data(bnrf1)
+> tit <- paste("VLMC for BNRF1 Epstein-Barr, N =", length(bnrf1EB))
+> N <- length(bnrf1EB)
+> 
+> nC <- length(cutoffs <- c(seq(2,6, by = .125),
++                           seq(6.5, 10, by = 0.5),
++                           seq(11, 15, by = 1)))
+> 
+>  ABIC.EB <- matrix(NA, 2, nC, dimnames = list(c("AIC", "BIC"), NULL))
+> sizes.EB <- matrix(NA, 4, nC)
+> for(ic in 1:nC) {
++     cuto <- cutoffs[ic]
++     v <- vlmc(bnrf1EB, cutoff = cuto)
++     ABIC.EB [, ic] <- AIC(v, k = c(2, log(N)))
++     sizes.EB[, ic] <- v$size
++ }
+> rownames(sizes.EB) <- names(v$size)
+> 
+> ## Hmm... BIC seems completely off
+> ## Table
+> cbind(cutoff = cutoffs, t(ABIC.EB), t(sizes.EB))
+      cutoff      AIC      BIC ord.MC context nr.leaves total
+ [1,]  2.000 11032.37 20097.99      7     481       251  4106
+ [2,]  2.125 10932.41 19055.66      7     431       216  3658
+ [3,]  2.250 10805.27 17703.43      7     366       179  3106
+ [4,]  2.375 10734.40 16840.98      7     324       154  2762
+ [5,]  2.500 10694.31 16367.39      7     301       140  2546
+ [6,]  2.625 10665.95 15698.22      6     267       121  2242
+ [7,]  2.750 10658.43 15276.05      6     245       110  2066
+ [8,]  2.875 10620.28 14408.61      6     201        90  1698
+ [9,]  3.000 10608.35 14132.83      6     187        82  1578
+[10,]  3.125 10590.89 13738.42      6     167        70  1418
+[11,]  3.250 10585.46 13412.57      6     150        61  1274
+[12,]  3.375 10560.17 12859.56      6     122        50  1034
+[13,]  3.500 10552.37 12493.66      6     103        42   866
+[14,]  3.625 10550.62 12303.43      6      93        36   778
+[15,]  3.750 10550.95 12190.68      6      87        35   730
+[16,]  3.875 10554.67 12024.77      6      78        31   658
+[17,]  4.000 10543.10 11730.49      5      63        27   538
+[18,]  4.125 10542.85 11654.85      5      59        25   498
+[19,]  4.250 10549.65 11492.02      5      50        21   418
+[20,]  4.375 10548.44 11245.80      5      37        17   314
+[21,]  4.500 10548.44 11245.80      5      37        17   314
+[22,]  4.625 10572.63 11119.21      5      29        13   242
+[23,]  4.750 10570.07 11060.11      5      26        12   218
+[24,]  4.875 10568.64 10945.59      4      20        10   170
+[25,]  5.000 10580.41 10919.66      4      18         9   154
+[26,]  5.125 10585.03 10905.44      4      17         8   146
+[27,]  5.250 10585.03 10905.44      4      17         8   146
+[28,]  5.375 10592.42 10875.13      4      15         7   130
+[29,]  5.500 10592.42 10875.13      4      15         6   122
+[30,]  5.625 10592.42 10875.13      4      15         6   122
+[31,]  5.750 10592.42 10875.13      4      15         6   122
+[32,]  5.875 10597.11 10860.97      4      14         5   114
+[33,]  6.000 10597.11 10860.97      4      14         5   114
+[34,]  6.500 10609.06 10778.69      3       9         3    74
+[35,]  7.000 10609.06 10778.69      3       9         3    74
+[36,]  7.500 10609.06 10778.69      3       9         3    74
+[37,]  8.000 10609.06 10778.69      3       9         3    74
+[38,]  8.500 10609.06 10778.69      3       9         3    74
+[39,]  9.000 10609.06 10778.69      3       9         3    74
+[40,]  9.500 10622.51 10754.45      3       7         2    58
+[41,] 10.000 10622.51 10754.45      3       7         2    58
+[42,] 11.000 10639.25 10733.48      3       5         2    42
+[43,] 12.000 10659.96 10716.51      1       3         2    26
+[44,] 13.000 10659.96 10716.51      1       3         2    26
+[45,] 14.000 10659.96 10716.51      1       3         2    26
+[46,] 15.000 10659.96 10716.51      1       3         2    26
+> 
+> par(mfrow = c(2,1))
+> plot(cutoffs, ABIC.EB[1,], type = "o", main = paste("AIC of", tit), log = 'xy')
+> title(sub = paste("qchisq(0.95, 4 -1) / 2 = ",format(qchisq(0.95, 3) / 2)))
+> plot(cutoffs, ABIC.EB[2,], type = "o", main = paste("BIC of", tit), log = 'xy')
+> 
+> 
+> ## Last Line:
+> cat('Time elapsed: ', proc.time() - .proctime00,'\n')
+Time elapsed:  1.27 0.09 1.52 0 0 
+> 
