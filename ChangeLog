@@ -1,3 +1,9 @@
+2005-10-06  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.3-9
+	* R/vlmc.R: dito
+	* R/sim.R (simulate.vlmc): update to new (R 2.2.0) generic simulate().
+
 2005-03-25  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): 1.3-8

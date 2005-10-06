@@ -1,5 +1,5 @@
 /* -- $Id: sim.c,v 1.5 2001/02/22 13:05:28 maechler Exp $
-   R/S callable subroutine -- similar to main program ../../simvlmc.c 
+   R/S callable subroutine -- similar to main program ../../simvlmc.c
 */
 #include "vlmc.h"
 #include "subutil.h"
@@ -27,7 +27,7 @@ void sim_vlmc(int* vlmc_vec,
 
     top = load_tree(vlmc_vec, &next_ind, *size_vlmc, /*level*/0, /*Debug*/0);
 
-    seed_in(&unused);
+    seed_in(&unused);/* i.e. GetRNGstate() */
 
     for (i = 0; i < *data_len; i++) {
 	/* Find the context, descending the tree, given y[i-1], y[i-2],... : */
@@ -44,7 +44,7 @@ void sim_vlmc(int* vlmc_vec,
 	    }
 	}
     }
-    seed_out(&unused);
+    seed_out(&unused);/* i.e. PutRNGstate() */
 
     free_node(top);/* do not leak ! */
 }
