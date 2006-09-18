@@ -13,6 +13,8 @@
 /* = maximal size of alphabet, i.e. different values in data
  * This currently determines the size of each node in the tree.
  * Enlarging this will use more memory even in the binary case !
+ * ---> see also ~/R/Pkgs/VLMC/TODO (7.)
+ *               ------------------
  *
  * FIXME:  _node struct below should not use max_alpha_len
  * -----   but should allocate depending on *used*  alpha_len ...

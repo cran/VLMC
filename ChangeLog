@@ -1,3 +1,12 @@
+2006-09-18  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* README-C: moved from ./src/ to toplevel (pedantic QA)
+
+2006-09-08  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (LazyData): yes
+ 	* DESCRIPTION (Version, Date): 1.3-10
+
 2005-10-06  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): 1.3-9

@@ -1,57 +1,57 @@
 Here I want to finally explore / explain  how the C code works :
 
-vlmc()		[R]		../R/vlmc.R
+vlmc()		[R]		R/vlmc.R
  |
- |--> vlmc_p()			fitvlmc.c
+ |--> vlmc_p()			src/fitvlmc.c
  |    \-> vlmc()	  	  "
  |	  |--> vlmcinit_alpha()	?
  |	  |--> create_set()	?
  |	  |--> push()		?
  |	  |--> create_node()	?
  |	  |--> generate()	?
- |	  |--> dump_tree()	io.c
+ |	  |--> dump_tree()	src/io.c
  |	  |--> prune()		?
  |	  |--> comp_difference  ?
- |	  |--> write_tree()	io.c
- |	  \--> tree_size()	saveload.c
+ |	  |--> write_tree()	src/io.c
+ |	  \--> tree_size()	src/saveload.c
  |
- \--> getvlmc()			fitvlmc.c
-      |-> save_tree()		saveload.c
+ \--> getvlmc()			src/fitvlmc.c
+      |-> save_tree()		src/saveload.c
       \-> free_node()		?
 
 
-predict.vlmc()		[R]	../R/predict.R
+predict.vlmc()		[R]	R/predict.R
  |
- \--> predict_vlmc_p()		predict.c
+ \--> predict_vlmc_p()		src/predict.c
       \--> predict_vlmc()	  "
 	   |-> copy_tree()	?
-	   |-> load_tree()	saveload.c
+	   |-> load_tree()	src/saveload.c
 	   |-> cumulate()	?
 	   \-> free_node()	?
 
-logLik.vlmc()		[R]	../R/entropy.R
+logLik.vlmc()		[R]	R/entropy.R
  |
- \-> entropy()		[R]	../R/entropy.R
+ \-> entropy()		[R]	R/entropy.R
      |
-     \--> entropy_sub()		entropy.c
+     \--> entropy_sub()		src/entropy.c
           |
-	  |--> load_tree()	saveload.c
-	  |--> entropy()	util.c
+	  |--> load_tree()	src/saveload.c
+	  |--> entropy()	src/util.c
 	  \--> free_node()	?
 
-draw.vlmc()		[R]	../R/draw.R
+draw.vlmc()		[R]	R/draw.R
  |
- \--> draw_p()			drawvlmc.c
+ \--> draw_p()			src/drawvlmc.c
       \--> draw()	  	  "
-	   |-> draw_tree()	io.c
+	   |-> draw_tree()	src/io.c
 	   |-> vlmcinit_alpha()	?
-	   |-> load_tree()	saveload.c
+	   |-> load_tree()	src/saveload.c
 	   |-> cumulate()	?
 	   \-> free_node()	?
 
 ----
 
-	   |-> read_tree()	io.c
+	   |-> read_tree()	src/io.c
 
 
 

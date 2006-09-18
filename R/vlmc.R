@@ -1,5 +1,5 @@
 #### $Id: vlmc.R,v 1.33 2005/10/06 12:34:36 maechler Exp $
-vlmc.version <- "VLMC 1.3-9;  after $Date: 2005/10/06 12:34:36 $ UTC"
+vlmc.version <- "VLMC 1.3-10;  after $Date: 2005/10/06 12:34:36 $ UTC"
 ##		      ----- same as the one in ../DESCRIPTION !
 
 vlmc <-
@@ -32,9 +32,9 @@ function(dts,
   Data <- as.integer(f.dts) - 1:1 #-> is integer in {0,1,...}
   alphabet <- levels(f.dts)# possibly unsorted!
   alpha.len <- length(alphabet)
-  ## FIXME
-  if(alpha.len > length(LETTERS))
-    stop("alphabet too large; currently limited to maximally 26 letters")
+  ## FIXME -- want *arbitrary* alphabet size --> new C code (alloc..)  see ../TODO (7.)
+  if(alpha.len > 255) ## Orig: length(LETTERS))
+    stop("alphabet too large; currently limited to maximally 255 letters")
   ialph <- 0:(alpha.len - 1)
   if(code1char && any(nchar(alphabet) > 1)) {
     if(!quiet)

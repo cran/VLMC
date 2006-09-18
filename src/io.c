@@ -223,7 +223,7 @@ node_t *read_tree(FILE *file, int level_check, int debug)
     node_t *node;
 
     if (level_check == 0) {/* very first line : Read alphabet */
-	fscanf(file, "%27s", alpha); /* Max alphabet length: 27 */
+	fscanf(file, "%*s", alpha, max_alpha_len);
 	alpha_len = strlen(alpha);
     }
     fscanf(file, "%d", &level); /* Read current level */
