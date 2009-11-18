@@ -11,15 +11,12 @@ as.dendrogram.vlmc(object, \dots)
   \item{object}{a \code{\link{vlmc}} object.}
   \item{\dots}{further arguments passed to and from methods.}
 }
-% \details{
-%   ~~ If necessary, more details than the __description__  above ~~
-% }
 \value{
   An object of class \code{\link{dendrogram}}, i.e. a nested list
   described on that page.
  %% FIXME add ??
 }
-\seealso{\code{\link[mva]{as.dendrogram}}, \code{\link[mva]{plot.dendrogram}}.}
+\seealso{\code{\link{as.dendrogram}}, \code{\link{plot.dendrogram}}.}
 
 \examples{
 data(presidents)

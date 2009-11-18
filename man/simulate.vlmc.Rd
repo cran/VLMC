@@ -10,7 +10,7 @@
 \arguments{
   \item{object}{typically the result of \code{\link{vlmc}(..)}.}
   \item{nsim}{non-negative integer, giving the length of the result.}
-  \item{seed}{random seed initializer; see \code{\link[stats]{simulate.lm}}.}
+  \item{seed}{random seed initializer; see \code{\link[stats]{simulate}}.}
   \item{n}{non-negative integer, giving the length of the result.}
   \item{n.start}{the number of initial values to be
     discarded (because of initial effects).}
