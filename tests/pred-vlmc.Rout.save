@@ -1,6 +1,6 @@
 
-R version 2.4.0 alpha (2006-09-17 r39373)
-Copyright (C) 2006 The R Foundation for Statistical Computing
+R version 2.10.1 RC (2009-12-12 r50714)
+Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -31,7 +31,7 @@ Loading required package: MASS
 > 
 > (vlmc.dt2c15  <- vlmc(dt2, cutoff = 1.5))
 
-`vlmc', a Variable Length Markov Chain;
+'vlmc' a Variable Length Markov Chain;
 	 alphabet '01', |alphabet| = 2, n = 56.
 Call: vlmc(dts = dt2, cutoff.prune = 1.5)
  -> extensions (= $size ) :
@@ -118,7 +118,7 @@ AIC =  36.65
 > 
 > (vlmc.dt2c.1 <- vlmc(dt2, cutoff = .1))
 
-`vlmc', a Variable Length Markov Chain;
+'vlmc' a Variable Length Markov Chain;
 	 alphabet '01', |alphabet| = 2, n = 56.
 Call: vlmc(dts = dt2, cutoff.prune = 0.1)
  -> extensions (= $size ) :
@@ -127,7 +127,7 @@ Call: vlmc(dts = dt2, cutoff.prune = 0.1)
 AIC =  56.77 
 > (vlmc.dt2c0  <- vlmc(dt2, cutoff = 0, thresh = 1))# need thresh=1 for "perfect fit"
 
-`vlmc', a Variable Length Markov Chain;
+'vlmc' a Variable Length Markov Chain;
 	 alphabet '01', |alphabet| = 2, n = 56.
 Call: vlmc(dts = dt2, cutoff.prune = 0, threshold.gen = 1)
  -> extensions (= $size ) :
@@ -591,5 +591,5 @@ integer(0)
 1 0    1                 0                 1    3    1       
 > 
 > cat("Time elapsed:", format(proc.time() - c0),"\n")
-Time elapsed: 0.098 0.006 0.104 0.000 0.000 
+Time elapsed: 0.084 0.008 0.179 0.000 0.000 
 > 

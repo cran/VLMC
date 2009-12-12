@@ -1,3 +1,10 @@
+2009-12-12  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.3-12
+
+	* R/vlmc.R (print.vlmc, etc): do not use `vlmc' (backquote) anymore.
+	* tests/pred-vlmc.Rout.save: update consequently
+
 2009-11-18  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): 1.3-11

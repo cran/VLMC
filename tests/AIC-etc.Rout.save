@@ -1,23 +1,24 @@
 
-R : Copyright 2002, The R Development Core Team
-Version 1.5.0 Under development (unstable) (2002-03-04)
+R version 2.10.1 RC (2009-12-12 r50714)
+Copyright (C) 2009 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
-Type `license()' or `licence()' for distribution details.
+Type 'license()' or 'licence()' for distribution details.
 
 R is a collaborative project with many contributors.
-Type `contributors()' for more information.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
 
-Type `demo()' for some demos, `help()' for on-line help, or
-`help.start()' for a HTML browser interface to help.
-Type `q()' to quit R.
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
 
 > .proctime00 <- proc.time()
 > require(VLMC)
-Loading required package: VLMC 
-Loading required package: mva 
-[1] TRUE
+Loading required package: VLMC
+Loading required package: MASS
 > 
 > ## Currently, there's also an extensive AIC example in
 > ## ../man/OZrain.Rd, i.e.  example(OZrain)
@@ -99,5 +100,5 @@ Loading required package: mva
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  1.27 0.09 1.52 0 0 
+Time elapsed:  1.144 0.008 2.262 0 0 
 > 

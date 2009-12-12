@@ -1,5 +1,5 @@
-#### $Id: vlmc.R,v 1.34 2009/11/18 18:10:00 maechler Exp $
-vlmc.version <- "VLMC 1.3-11;  after $Date: 2009/11/18 18:10:00 $ UTC"
+#### $Id: vlmc.R,v 1.35 2009/12/12 16:17:06 maechler Exp $
+vlmc.version <- "VLMC 1.3-12;  after $Date: 2009/12/12 16:17:06 $ UTC"
 ##		      ----- same as the one in ../DESCRIPTION !
 
 vlmc <-
@@ -24,7 +24,7 @@ function(dts,
       stop("vlmc() only works on vectors (integer, character, factor)")
   if(is.character(dts)) {
     if(!all(i1 <- (1 == (nc <- nchar(dts)))))
-        ## FIXME, change this to a `note()'!
+        ## FIXME, change this to a 'note()'!
       warning("character argument has elements of more than 1 character")
   }
   ## common format: factor w/ levels =^= alphabet
@@ -59,13 +59,13 @@ function(dts,
   }
 
   dump <- as.integer(dump[1])
-  if(dump < 0) stop("`dump' must be non-negative integer")
+  if(dump < 0) stop("'dump' must be non-negative integer")
   if(dump > 0) {
     ctl.dump <- as.integer(ctl.dump)
-    if(length(ctl.dump) != 2) stop("`ctl.dump' must be integer(2).")
+    if(length(ctl.dump) != 2) stop("'ctl.dump' must be integer(2).")
     if(ctl.dump[2] < 1) # default -- FIXME : should depend also on cutoff..
 	ctl.dump[2] <- as.integer(max(6, 15 - log10(n)))
-    if(ctl.dump[1] < 0) stop("`ctl.dump[1]' must be non-negative.")
+    if(ctl.dump[1] < 0) stop("'ctl.dump[1]' must be non-negative.")
     ## Fixme : need even more consistency checks ..
   }
   if(debug) cat("vlmc: ctl.dump = ",ctl.dump,"\n")
@@ -118,8 +118,8 @@ print.vlmc <- function(x, digits = max(3, getOption("digits") - 3), ...)
   ox <- x
   vvec <- (x $ vlmc.vec)#.Alias
   used.args <- names(x$call)
-  cat("\n`vlmc', a Variable Length Markov Chain;\n\t alphabet '",x$alpha,
-      "', |alphabet| = ",x$alpha.len,
+  cat("\n", sQuote('vlmc')," a Variable Length Markov Chain;\n",
+      "\t alphabet '", x$alpha, "', |alphabet| = ",x$alpha.len,
       ", n = ",x$n,".\nCall: ",deparse(x$call),
       if(!any(used.args %in% c("cutoff.prune","alpha.c")))
       paste(";	default cutoff =", format(x$cutoff,digits=digits)),
@@ -177,9 +177,9 @@ print.summary.vlmc <-
       if(vvec[1] != x$alpha.len)
 	  stop("invalid vlmc structure {alpha.len}")
       if((lV <- length(vvec)) > 10000)
-	  warning("|vvec| > 10000; not printing. Use `prt.vvec()' if you want")
+	  warning("|vvec| > 10000; not printing. Use 'prt.vvec()' if you want")
       else {
-	  cat("\ncontext tree encoding `vvec'tor:\n")
+	  cat("\ncontext tree encoding 'vvec'tor:\n")
 	  if(2*lV > getOption("expressions")) {
 	      oop <- options(expressions = 2*lV)
 	      on.exit(options(oop))

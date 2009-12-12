@@ -1,5 +1,5 @@
 
-R version 2.10.0 Patched (2009-11-17 r50471)
+R version 2.10.1 RC (2009-12-12 r50714)
 Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -1337,5 +1337,5 @@ In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  25.633 0.28 28.476 0 0 
+Time elapsed:  26.865 0.256 48.951 0 0 
 > 
