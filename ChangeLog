@@ -1,3 +1,24 @@
+2012-09-11  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.3-13
+
+	* src/vlmc.h (max_alpha_len): now allow alphabet length up to 95.
+	* R/vlmc.R (vlmc): and catch the case when it would be longer.
+	Prompted by Jesse Bridgewater's e-mail and Stackoverflow
+	http://stackoverflow.com/questions/11236776/r-package-vlmc-dies-if-state-space-size-exceeds-27
+
+2011-12-23  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Depends): R >= 2.13.0:  Want BIC() and nobs() to work.
+
+2011-12-22  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* NAMESPACE: useDynLib() but also hide most S3 methods.
+
+	* R/entropy.R (logLik.vlmc): add 'nobs' --> BIC() works as well.
+
+	* src/io.c: use quote (') instead of backquote(`) in C output, too.
+
 2009-12-12  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): 1.3-12

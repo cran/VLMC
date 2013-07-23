@@ -44,7 +44,7 @@ vlmctree <- function(x)
           if(all(sapply(node$child, is.null))) { ## this is a leaf
               node$child <- NULL
               0 # parent level
-          } else 1:1 + max(sapply(node$child, function(n)
+          } else 1L + max(sapply(node$child, function(n)
                                   if(is.null(n)) 0 else n$level[2]))
       node$level <- as.integer(node$level)
       if(lev > 0)
@@ -63,7 +63,7 @@ str.vtree <- function(object, ...)
     if(!is.null(lev <- object$level)) {
 	nch <- length(object$child)
 	cat(if(lev[1])
-	    paste(rep(" ", lev[1]+1), collapse="..") else "`vtree':\n",
+	    paste(rep(" ", lev[1]+1), collapse="..") else "'vtree':\n",
             paste("{", lev[2],"}", sep=""),
 	    format(object$count),"|", object$total, "; ",
 	    if(nch) paste(nch,"children") else "_leaf_",
@@ -100,7 +100,7 @@ as.dendrogram.vlmc <- function(object, ...)
 
     vv2dendro <- function(vv, cl.lev)
     {
-        ## construct the nested list, level `cl.lev' from `vvec' -- recursively!
+        ## construct the nested list, level 'cl.lev' from 'vvec' -- recursively!
         if((lev <- vv[1]) >= 0) { ## non-end
             if(lev != cl.lev)
                 stop(paste("malformed vlmc tree at level",cl.lev))
@@ -112,7 +112,7 @@ as.dendrogram.vlmc <- function(object, ...)
             vv <- vv[ - c(ii, k+1)]     # drop the first 1..(k+1) ones
             for(i in ii) { ## extract child[i] (and *its* children)
                 r <- vv2dendro(vv, cl.lev = cl.lev+1)
-                ## downdating `vv',  updating node[[i]]:
+                ## downdating 'vv',  updating node[[i]]:
                 vv <-
                     if(!is.null(r)) {
                         node[[i]] <- r[[1]]
@@ -126,14 +126,14 @@ as.dendrogram.vlmc <- function(object, ...)
             ##- cat("lev=",lev,";", "count=",count,"  vv : \n"); str(vv)
             if(all(kids0 <- sapply(node, is.null))) { ## this is a leaf
                 node <- sum(count)
-                attr(node,"members") <- 1:1
+                attr(node,"members") <- 1L
                 attr(node,"leaf") <- TRUE
             }
             else { ## has at least one child;
                 node[kids0] <- NULL ## drop the NULL ones (but remember which!)
                 attr(node,"0-kids") <- (0:(k-1))[kids0]
                 ## attr(node,"height") <- ## parent level :
-                ##    1:1 + max(sapply(node, function(n) attr(n,"height")))
+                ##    1L + max(sapply(node, function(n) attr(n,"height")))
                 attr(node,"members") <- ## parent level :
                     sum(sapply(node, function(n) attr(n,"members")))
             }

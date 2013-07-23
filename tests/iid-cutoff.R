@@ -14,12 +14,15 @@ fff <- function(x){
 }
 
 N <- 64# had 200
-r <- matrix(NA, 4, N)
+ur.nms <- c("root", "f.root", "iter", "estim.prec")
+r <- matrix(NA, length(ur.nms), N,
+            dimnames = list(ur.nms, NULL))
 if(R.version$major != "1" || as.numeric(R.version$minor) >= 7) RNGversion("1.6")
 set.seed(6352)
 for(i in 1:N) {
     sr4 <- sample(rain4c)
-    r[,i] <- rr <- unlist(uniroot(fff, c(1, 20), tol =1e-2))
+    ur <- uniroot(fff, c(1, 20), tol =1e-2)
+    r[,i] <- rr <- unlist(ur[ur.nms])
 }
 rownames(r) <- names(rr)
 t(r)

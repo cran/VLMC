@@ -1,4 +1,4 @@
-% $Id: residuals.vlmc.Rd,v 1.10 2002/11/25 17:29:50 maechler Exp $
+% $Id: residuals.vlmc.Rd,v 1.11 2012/09/11 16:57:09 maechler Exp $
 \name{residuals.vlmc}
 \alias{residuals.vlmc}
 \title{Compute Residuals of a Fitted VLMC Object}
@@ -75,7 +75,7 @@ rd[1:7]
 ## sum of squared dev.residuals === deviance :
 all.equal(sum(rd[-1] ^ 2),
           deviance(vlmc.pres))
-\testonly{stopifnot(all.equal(sum(rd[-1] ^ 2),
+\dontshow{stopifnot(all.equal(sum(rd[-1] ^ 2),
                     deviance(vlmc.pres),tol=1e-12))
 }
 }

@@ -1,10 +1,37 @@
-## Quick & Dirty: export all but objects starting with "." :
-exportPattern("^[^\\.]")
+useDynLib(VLMC,
+	  vlmc_p, sim_vlmc, predict_vlmc_p,
+	  getvlmc, entropy_sub, entropy2_sub)
 
-## importFrom(stats,   <dendrogram class & methods> )
+importFrom(stats, as.dendrogram)
+
+export ("alpha2int", "alphabet", "alphabet.vlmc", "char2int"
+	, "draw"
+	, "entropy", "entropy2"
+	, "id2ctxt", "int2alpha", "int2char", "is.vlmc"
+	, "prt.vvec"
+	, "RCplot"
+	, "simulate.vlmc"
+	, "vlmc", "vlmctree"
+	, "vlmc.version"
+	)
+
 
 ## importFrom(MASS, rational, fractions)
 
+S3method(as.dendrogram, vlmc)
+S3method(deviance, vlmc)
 S3method(draw, vlmc)
+S3method(fitted, vlmc)
+S3method(predict, vlmc)
+S3method(summary, vlmc)
+S3method(residuals, vlmc)
+S3method(logLik, vlmc)
+##> we have advertized simulate.vlmc() .. still??
+##> S3method(simulate, vlmc)
+S3method(str, vtree)# <- vlmctree()
+
+S3method(print, vlmc)
+S3method(print, predict.vlmc)
+S3method(print, summary.vlmc)
 
 

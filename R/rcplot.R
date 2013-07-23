@@ -10,7 +10,7 @@ RCplot <-
 {
     ## Author: Martin Maechler, Date:  1 Mar 2002, 17:39
     namx <- deparse(substitute(x))
-    if(!is.vlmc(x)) stop("`x' must be a fitted VLMC object")
+    if(!is.vlmc(x)) stop("'x' must be a fitted VLMC object")
     fID <- id2ctxt(predict(x, type="id"), alpha = alphabet)
     ok <- fID != "NA"
     ## drop those with "NA" context (at least the first one!)

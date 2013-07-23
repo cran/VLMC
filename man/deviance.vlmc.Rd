@@ -6,7 +6,7 @@
   object.  The log-likelihood is also known as ``entropy''.
 }
 \usage{
-deviance.vlmc(object, ...)
+\S3method{deviance}{vlmc}(object, ...)
 }
 \arguments{
  \item{object}{typically the result of \code{\link{vlmc}(..)}.}

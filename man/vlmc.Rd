@@ -1,4 +1,4 @@
-% $Id: vlmc.Rd,v 1.10 2003/07/09 08:16:05 maechler Exp $
+% $Id: vlmc.Rd,v 1.11 2012/09/11 17:20:51 maechler Exp $
 \name{vlmc}
 \encoding{latin1}
 \title{Fit a Variable Length Markov Chain (VLMC)}
@@ -12,6 +12,9 @@
   \code{threshold.gen = 1}) the context states of the time series.  In
   the second step, many states of the MC are collapsed by \emph{pruning}
   the corresponding context tree.
+
+  Currently, the \dQuote{alphabet} may contain can at most 26 different
+  \dQuote{character}s.
 }
 \usage{
 vlmc(dts,
@@ -58,7 +61,8 @@ is.vlmc(x)
 }
 \value{
   A \code{"vlmc"} object, basically a list with components
-  \item{n}{length of data series when fit.}
+  \item{nobs}{length of data series when fit.  (was named \code{"n"} in
+    earlier versions.)}
   \item{threshold.gen, cutoff.prune}{the arguments (or their defaults).}
   \item{alpha.len}{the alphabet size.}
   \item{alpha}{the alphabet used, as one string.}
@@ -117,6 +121,7 @@ f2 <- rep(1:0,2)
 data(presidents)
 dpres <- cut(presidents, c(0,45,70, 100)) # three values + NA
 table(dpres <- factor(dpres, exclude = NULL)) # NA as 4th level
+levels(dpres)#-> make the alphabet -> warning
 vlmc.pres <- vlmc(dpres, debug = TRUE)
 vlmc.pres
 
@@ -125,6 +130,15 @@ vlmc.pres$alpha
 stopifnot(
   length(print(strsplit(vlmc.pres$alpha,NULL)[[1]])) == vlmc.pres$ alpha.len
 )
+
+## You now can use larger alphabets (up to 95) letters:
+set.seed(7); it <- sample(40, 20000, replace=TRUE)
+v40 <- vlmc(it)
+v40
+## even larger alphabets now give an error:
+il <- sample(100, 10000, replace=TRUE)
+ee <- tryCatch(vlmc(il), error= function(e)e)
+stopifnot(is(ee, "error"))
 }
 \keyword{ts}
 \keyword{models}

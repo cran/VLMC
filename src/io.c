@@ -1,4 +1,4 @@
-/* -- $Id: io.c,v 1.19 2001/10/17 12:52:14 maechler Exp $ */
+/* -- $Id: io.c,v 1.20 2011/12/22 17:27:31 maechler Exp $ */
 #include <stdio.h>
 #include <string.h>
 
@@ -38,7 +38,7 @@ void draw_tree(node_t *node, node_t *super, int ia,
 	/*
 	  For that, the current node must "know" not only its level,
 	  but also
-	  1) if it's the last on the current level (then "+", else "`")
+	  1) if it's the last on the current level (then "+", else "'")
 	  2) which levels "above" have not been the last ones (then put "|")
 	*/
 	if(is_last)
@@ -52,13 +52,13 @@ void draw_tree(node_t *node, node_t *super, int ia,
 		   lev, MAX_DEPTH);
     for (i = 0; i < lev; i++)
 	if(kind == 0) /* slightly improved */
-	    Rprintf0(i < lev - 1 ? "    " : " `--");
+	    Rprintf0(i < lev - 1 ? "    " : " '--");
 	else if(kind == 1) /* old way */
 	    Rprintf0(i == 0      ? " +--" : "-+--");
 	else /* kind >= 2: try to be smart... */
 	    Rprintf0(i < lev - 1
 		     ? (lev_fini[i] ? "    " : " |  ")
-		     : (is_last	    ? " `--" : " +--"));
+		     : (is_last	    ? " '--" : " +--"));
 
     Rprintf("[%c]-(", (ia < 0) ? 'x' : alpha[ia]);
 
@@ -82,7 +82,7 @@ void draw_tree(node_t *node, node_t *super, int ia,
 	kind = 3;
     }
     if(do_mark) {/* kind = 3, 5, .. */
-	/* Now, print a ``mark'' for end-nodes and those
+	/* Now, print a ''mark'' for end-nodes and those
 	 * "counting" for context size.
 	 * -> use code (ideas) from tree_size() VLMC/src/saveload.c
 	 */
@@ -110,7 +110,7 @@ void draw_tree(node_t *node, node_t *super, int ia,
     if(kind >= 2) {
 	for (i = lev; i < MAX_DEPTH; i++)
 	    lev_fini[i] = 0;
-	/* For smart `kind',
+	/* For smart 'kind',
 	   need to find out which of the children will be the last : */
 	if(show_hidden >= 3)
 	    is_last = alpha_len - 1;
@@ -124,7 +124,98 @@ void draw_tree(node_t *node, node_t *super, int ia,
 		      kind, show_hidden, do_delta, debug);
 }/* {draw_tree} */
 
-void dump_tree(node_t *node, FILE *file, int is_top, int ia,
+void dump_tree(node_t *node, int is_top, int ia,
+	       int cardX/* = alpha_len */, const char *alphabet,
+	       int ct_wid, int nmax_set)
+{
+    /* __recursive__ function for dumping all content
+       of a VLMC tree to R's console
+    */
+    int i, num, cut, ct1 = ct_wid + 1;
+    set_t *myset;
+
+    if(is_top) { /* at the top : Print a header line */
+	Rprintf("Lev Ch|");
+	for (i = 0; i < cardX; i++)
+	    Rprintf(" %*c", ct_wid, alphabet[i]);
+	Rprintf(" | %*s | %*s %*s :",
+	       ct1, "tot", ct1, "num", ct1, "size");
+	Rprintf(" ..{set->list}..\n");
+	Rprintf("------+-");
+	for(i = cardX*ct_wid + 3 * ct1 + 31; i > 0; i--)
+	    Rprintf("-");
+	Rprintf("\n");
+    }
+
+    /* -------- Print ONE line per Node ------------ */
+    Rprintf("%3d ", node->level);
+    Rprintf("%1c |", (ia < 0) ? 'x' : alphabet[ia]);
+
+    for (i = 0; i < cardX; i++)
+	Rprintf(" %*d", ct_wid,	   node->count[i]);
+    Rprintf(" | %*d |", ct1, node->total);
+
+    /* the "vals set" : --- only non-NULL after generate() !! */
+    if((myset = node->vals) != NULL) {
+	Rprintf(" %*d %*d :", ct1, (num = myset->num), ct1, myset->size);
+	if (num > nmax_set) { num = nmax_set; cut = 1; } else cut = 0;
+	for (i = 0; i < num; i++)
+	    Rprintf(" %d", myset->list[i]);
+	if(cut) Rprintf(" ..");
+    } else  Rprintf(" <empty>");
+    Rprintf("\n");
+
+    /* -------- Now do all the child nodes : ----------- */
+    for (i = 0; i < cardX; i++)
+	if (node->child[i] != NULL)
+	    dump_tree(node->child[i], 0, i,
+		      cardX, alphabet, ct_wid, nmax_set);
+}/* dump_tree */
+
+void write_tree(node_t *node, int debug)
+{
+    /* Write the "fitted VLMC" in 'node' to R's console.
+     * ___Recursive___ Function
+     *
+     * uses GLOBAL alpha[] & alpha_len
+     */
+    int i;
+
+    if (node == NULL) { /* leaf */
+	if (debug) REprintf("%s","- ");
+#ifndef ALTERNATIVE
+	Rprintf("-1\n");
+#else
+	Rprintf("-1 ");
+#endif
+    }
+    else {
+	if (debug) REprintf("[%d]", node->level);
+
+	if (node->level == 0) { /* first line = alphabet */
+	    Rprintf("%s\n", alpha);
+	}
+
+#ifndef ALTERNATIVE
+	Rprintf("%d", node->level);
+#else
+	Rprintf("\n%*d", node->level+1, node->level);
+#endif
+	for (i = 0; i < alpha_len; i++)
+	    Rprintf(" %d", node->count[i]);
+	Rprintf("\n");
+
+	for (i = 0; i < alpha_len; i++)
+	    write_tree(node->child[i], debug);
+	if (debug) REprintf("%s","\n");
+    }
+} // write_tree()
+
+#ifdef VLMC_USING_FILES
+
+// No longer used from R {as that should not use stdout, etc}
+// rather dump_tree() is
+void f_dump_tree(node_t *node, FILE *file, int is_top, int ia,
 	       int cardX/* = alpha_len */, const char *alphabet,
 	       int ct_wid, int nmax_set)
 {
@@ -170,9 +261,9 @@ void dump_tree(node_t *node, FILE *file, int is_top, int ia,
 	if (node->child[i] != NULL)
 	    dump_tree(node->child[i], file, 0, i,
 		      cardX, alphabet, ct_wid, nmax_set);
-}/* dump_tree */
+}/* f_dump_tree */
 
-void write_tree(node_t *node, FILE *file, int debug)
+void f_write_tree(node_t *node, FILE *file, int debug)
 {
     /* Write the "fitted VLMC" in 'node' to file.
      * ___Recursive___ Function
@@ -210,7 +301,9 @@ void write_tree(node_t *node, FILE *file, int debug)
 	    write_tree(node->child[i], file, debug);
 	if (debug) REprintf("%s","\n");
     }
-}
+} // f_write_tree()
+
+#endif // using_files --------------------------------------------------------
 
 node_t *read_tree(FILE *file, int level_check, int debug)
 {

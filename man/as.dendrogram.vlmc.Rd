@@ -5,7 +5,7 @@
   This is a method for the \code{as.dendrogram} generic function
 }
 \usage{
-as.dendrogram.vlmc(object, \dots)
+\method{as.dendrogram}{vlmc}(object, \dots)
 }
 \arguments{
   \item{object}{a \code{\link{vlmc}} object.}

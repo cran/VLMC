@@ -1,7 +1,7 @@
 ## data() sets directory
-load("bnrf1.rda")
-bnrf1EB <- as.factor(strsplit(bnrf1EB, "")[[1]])
-bnrf1HV <- as.factor(strsplit(bnrf1HV, "")[[1]])
+load(system.file(file.path("xdata", "bnrf1_both.rda"), package = "VLMC"))
+bnrf1EB <- as.factor(strsplit(bnrf1EB, "")[[1L]])
+bnrf1HV <- as.factor(strsplit(bnrf1HV, "")[[1L]])
 
 ## How MM packaged these :
 if(FALSE) {

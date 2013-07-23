@@ -9,7 +9,7 @@ if(!exists("simulate", mode = "function")) {
 ## -- following simulate.lm() in .../R/src/library/stats/R/lm.R
 simulate.vlmc <-
     function(object, nsim = 1, seed = NULL,
-             n = object$n, n.start = 64 * object$size["context"],
+             n = object$n, n.start = 64 * object$size[["context"]],
              integer.return = FALSE, keep.RSeed = TRUE, ...)
 {
     ## Author: Martin Maechler, Date: 10 Apr 2000
@@ -21,7 +21,7 @@ simulate.vlmc <-
     if(0 > (n <- as.integer(n)))
         stop("required output-length n must be >= 0")
     n <- as.integer(n + n.start)
-    if(keep.RSeed) { # behave as generic `?simulate' says
+    if(keep.RSeed) { # behave as generic '?simulate' says
         if(!exists(".Random.seed", envir = .GlobalEnv))
             runif(1)                 # initialize the RNG if necessary
         if(is.null(seed))

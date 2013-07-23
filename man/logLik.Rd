@@ -33,7 +33,8 @@ entropy2(ivlmc1, ivlmc2, alpha.len = ivlmc1[1])
 
   Note that the \code{logLik} method is used by the default method of
   the \code{\link{AIC}} generic function (from R version 1.4.x), and
-  hence provides \code{AIC(object)} for vlmc objects.
+  hence provides \code{AIC(object)} for vlmc objects.  Also, since vlmc
+  version 1.3-13, \code{\link{BIC}()} works as well.
 }
 \author{Martin Maechler}
 \seealso{\code{\link{deviance.vlmc}},

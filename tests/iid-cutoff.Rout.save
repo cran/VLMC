@@ -1,7 +1,7 @@
 
-R version 2.10.1 RC (2009-12-12 r50714)
-Copyright (C) 2009 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
+R Under development (unstable) (2013-07-22 r63380) -- "Unsuffered Consequences"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -35,15 +35,18 @@ Loading required package: MASS
 + }
 > 
 > N <- 64# had 200
-> r <- matrix(NA, 4, N)
+> ur.nms <- c("root", "f.root", "iter", "estim.prec")
+> r <- matrix(NA, length(ur.nms), N,
++             dimnames = list(ur.nms, NULL))
 > if(R.version$major != "1" || as.numeric(R.version$minor) >= 7) RNGversion("1.6")
 Warning message:
 In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
-  Buggy version of Kinderman-Ramage generator used
+  buggy version of Kinderman-Ramage generator used
 > set.seed(6352)
 > for(i in 1:N) {
 +     sr4 <- sample(rain4c)
-+     r[,i] <- rr <- unlist(uniroot(fff, c(1, 20), tol =1e-2))
++     ur <- uniroot(fff, c(1, 20), tol =1e-2)
++     r[,i] <- rr <- unlist(ur[ur.nms])
 + }
               1 :  13 ( 8266)
              20 :   0 (   10)
@@ -1337,5 +1340,8 @@ In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  26.865 0.256 48.951 0 0 
+Time elapsed:  8.961 0.108 9.208 0 0 
 > 
+> proc.time()
+   user  system elapsed 
+  9.232   0.148   9.610 

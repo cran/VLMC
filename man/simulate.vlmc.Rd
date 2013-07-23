@@ -4,7 +4,7 @@
 \description{Simulate from fitted VLMC model -- basis of the VLMC bootstrap}
 \usage{
 \method{simulate}{vlmc}(object, nsim = 1, seed = NULL,
-         n = object$n, n.start = 64 * object$size["context"],
+         n = object$n, n.start = 64 * object$size[["context"]],
          integer.return = FALSE, keep.RSeed = TRUE, \dots)
 }
 \arguments{

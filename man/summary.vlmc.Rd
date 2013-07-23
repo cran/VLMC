@@ -36,7 +36,7 @@ data(bnrf1)
 vb <- vlmc(bnrf1EB)
 svb <- summary(vb)
 svb
-\testonly{% needs options(expression = <larger>) :
+\dontshow{% needs options(expression = <larger>) :
 try(## since it currently fails (".. nested too deeply") -- FIXME -- !
   print(svb, vvec.print = TRUE)
 )

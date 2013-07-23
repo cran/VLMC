@@ -9,7 +9,7 @@
 /* ------------- GLOBALS --------------- */
 
 /* Constants */
-#define max_alpha_len 27
+#define max_alpha_len 95
 /* = maximal size of alphabet, i.e. different values in data
  * This currently determines the size of each node in the tree.
  * Enlarging this will use more memory even in the binary case !

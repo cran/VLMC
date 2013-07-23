@@ -1,4 +1,4 @@
-/*-- $Id: fitvlmc.c,v 1.17 2002/02/08 17:57:16 maechler Exp $
+/*-- $Id: fitvlmc.c,v 1.19 2013/07/25 09:37:24 maechler Exp $
  * -- tree_sub.c --- Subroutine instead of main program
  * -- was ../../tree.c : tree.c,v 1.9 2000/03/17 17:13:12 maechler Exp maechler
  */
@@ -82,7 +82,7 @@ void vlmc(/*const*/int *Data/*[], but need pointer !*/, int data_len,
 
   if (do_dump >= 2) {
       if(debug) REprintf("%s", "Dump{Tree} __before__ pruning: \n");
-      dump_tree(top, DUMP_file, /*top*/1, -1,
+      dump_tree(top, /*top*/1, -1,
 		alpha_len, alpha, dump_ct_wid, dump_nmax_set);
   }
 
@@ -91,11 +91,11 @@ void vlmc(/*const*/int *Data/*[], but need pointer !*/, int data_len,
 
   if (do_dump) {
       if(debug) REprintf("%s", "Dump{Tree} __after__ pruning: \n");
-      dump_tree(top, DUMP_file, /*top*/1, -1,
+      dump_tree(top, /*top*/1, -1,
 		alpha_len, alpha, dump_ct_wid, dump_nmax_set);
   }
 
-  if (debug) REprintf("%s", "computing differences[`completing'] ... ");
+  if (debug) REprintf("%s", "computing differences['completing'] ... ");
   /*-- analog in R : from draw() counts to draw(*, cumulative=FALSE) :*/
   comp_difference(top);
 
@@ -106,8 +106,7 @@ void vlmc(/*const*/int *Data/*[], but need pointer !*/, int data_len,
 
   if (debug) {
       REprintf("%s", "writing tree...\n");
-      /* FIXME : Write to FILE (the name of which is given as argument .. */
-      write_tree(top, stdout, debug);
+      write_tree(top, debug);
   }
   size_vlmc[0] = 1;/* = alpha_len */ for(i = 1; i < 3; i++) size_vlmc[i] = 0;
   tree_size(top, /* --> */size_vlmc);

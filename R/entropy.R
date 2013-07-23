@@ -1,6 +1,6 @@
 ## Purpose: Entropy of a fitted "vlmc" object, see ?vlmc
 ## ------------------------------------------------------------------------
-## $Id: entropy.R,v 1.9 2002/02/05 09:14:34 maechler Exp $
+## $Id: entropy.R,v 1.11 2013/07/25 09:30:28 maechler Exp $
 ## Author: Martin Maechler, Date:  5 Apr 2000, 18:31
 
 ## Entropy  ===  Log[Likelihood] !
@@ -21,13 +21,14 @@ entropy <- function(object)
 logLik.vlmc <- function(object, ...)
 {
     r <- entropy(object)
-    attr(r, "df") <- (object$alpha.len - 1) * unname(object$size["context"])
+    attr(r, "df") <- (object$alpha.len - 1) * unname(object$size[["context"]])
+    attr(r, "nobs") <- object$n
     class(r) <- "logLik"
     r
 }
 
 
-### Maybe -- rather call this on 2 `vlmc' objects
+### Maybe -- rather call this on 2 'vlmc' objects
 entropy2 <- function(ivlmc1, ivlmc2, alpha.len = ivlmc1[1])
 {
     ## Purpose: Entropy between two vlmc (sub) trees, see ?vlmc

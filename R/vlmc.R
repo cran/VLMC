@@ -1,5 +1,5 @@
-#### $Id: vlmc.R,v 1.35 2009/12/12 16:17:06 maechler Exp $
-vlmc.version <- "VLMC 1.3-12;  after $Date: 2009/12/12 16:17:06 $ UTC"
+#### $Id: vlmc.R,v 1.40 2013/07/25 09:35:56 maechler Exp $
+vlmc.version <- "VLMC 1.3-13;  after $Date: 2013/07/25 09:35:56 $ UTC"
 ##		      ----- same as the one in ../DESCRIPTION !
 
 vlmc <-
@@ -29,21 +29,29 @@ function(dts,
   }
   ## common format: factor w/ levels =^= alphabet
   n <- length(f.dts <- as.factor(dts))
-  Data <- as.integer(f.dts) - 1:1 #-> is integer in {0,1,...}
+  Data <- as.integer(f.dts) - 1L #-> is integer in {0,1,...}
   alphabet <- levels(f.dts)# possibly unsorted!
   alpha.len <- length(alphabet)
   ## FIXME -- want *arbitrary* alphabet size --> new C code (alloc..)  see ../TODO (7.)
-  if(alpha.len > 255) ## Orig: length(LETTERS))
-    stop("alphabet too large; currently limited to maximally 255 letters")
+  ## simple for now
+  chars <- c(letters,LETTERS, 0:9)
+  asc <- strsplit(rawToChar(as.raw(32:126)),"")[[1L]] ## *printable* ASCII chars
+  ## trick to put the quotes last:
+  asc <- c(asc, c("'","\"","`"))
+  asc <- asc[!duplicated(asc, fromLast=TRUE)]
+  chars <- c(chars, setdiff(asc, chars))
+  if(alpha.len > length(chars)) ## or  255 (from C coding of 8-bit) Orig: length(LETTERS))
+    stop("alphabet too large; currently limited to maximally ",
+	 length(chars)," letters")
   ialph <- 0:(alpha.len - 1)
   if(code1char && any(nchar(alphabet) > 1)) {
     if(!quiet)
 	warning("alphabet with >1-letter strings; trying to abbreviate")
-    alphabet <- abbreviate(alphabet, min=1)
+    alphabet <- abbreviate(alphabet, 1)
     if(any(nchar(alphabet) > 1))
       alphabet <-
-	if(alpha.len <= 10) as.character(ialph)
-	else letters[1:alpha.len]
+	if(alpha.len <= 10) as.character(ialph) ## ialph = "0", "1", "2", ... "9" (at most)
+	else chars[1:alpha.len]
   }
   Alpha <- paste(alphabet, collapse = "")
   if(debug)
@@ -72,7 +80,7 @@ function(dts,
 
   r <- .C("vlmc_p",
 	  data	 = Data,
-	  n	 = n,
+	  nobs	 = n,
 	  threshold.gen= as.integer(threshold.gen),
 	  cutoff.prune = as.double(cutoff.prune),
 	  alpha.len    = as.integer(alpha.len),
@@ -99,7 +107,7 @@ function(dts,
       warning(paste(".C(\"vlmc\"..) : |alphabet| inconsistency:",
 		    alpha.len, "!=", rvec[1]))
   r$vlmc.vec <- rvec
-  if(y) r$y <- alphabet[1:1 + Data]
+  if(y) r$y <- alphabet[1L + Data]
   r$data <- r$debug <- r$dump.flags <- NULL
   r$call <- cl
   class(r) <- "vlmc"
@@ -209,8 +217,8 @@ prt.vvec <- function(v, nalph, pad = " ")
   else {
     i <- 1 + 1:nalph
     cat(if(v[1] != 0) "\n",
-	sapply(3*v[1], function(n)paste(character(n),collapse= pad)),
-	"{",v[1],"} [", paste(formatC(v[i],w=1),collapse=", "), "]", sep="")
+	sapply(3*v[1], function(n) paste(character(n),collapse= pad)),
+	"{",v[1],"} [", paste(formatC(v[i], width=1), collapse=", "), "]", sep="")
   }
   prt.vvec(v[-c(1,i)], nalph, pad = pad)
 }

@@ -35,7 +35,7 @@ n <- length(bnrf1HV)
 table(t = bnrf1HV[-1], "t-1" = bnrf1HV[-n])
 
 plot(as.integer(bnrf1EB[1:500]), type = "b")
-\testonly{
+\dontshow{
  ftable(table( t = bnrf1HV[-(1:2)],
               "t-1" = bnrf1HV[-c(1,n)],
               "t-2" = bnrf1HV[-c(n-1,n)]))

@@ -34,7 +34,7 @@ summary(OZrain[has.rain])# Median = 18,  Q3 = 50
 table(rain01 <- as.integer(has.rain))
 table(rain4c <- cut(OZrain, c(-.1, 0.5, 18.5, 50.1, 1000)))
 
-\testonly{
+\dontshow{
   table(rain4c <- as.integer(rain4c) - 1:1)
   draw(v4 <- vlmc(rain4c))
   v4 # cutoff 3.907; MC = 9, context = 39
@@ -60,7 +60,7 @@ AIC(v1  <- vlmc(rain01))# cutoff = 1.92
 AIC(v00 <- vlmc(rain01, cut = 1.4))
 AIC(v0  <- vlmc(rain01, cut = 1.5))
 
-\testonly{
+\dontshow{
   lLv <- function(co) {
     cat(co,"")
     l <- logLik(vlmc(rain01, cut = co))

@@ -1,4 +1,4 @@
-% $Id: draw.vlmc.Rd,v 1.8 2003/10/02 10:13:04 maechler Exp $
+% $Id: draw.vlmc.Rd,v 1.9 2011/12/22 18:06:16 maechler Exp $
 \name{draw.vlmc}
 \alias{draw.vlmc}
 \alias{draw}
@@ -10,12 +10,12 @@
 }
 \usage{
 draw(x, \dots)
-draw.vlmc(x, kind=3, flag = TRUE, show.hidden = 0,
-          cumulative = TRUE, delta = cumulative, debug = FALSE, \dots)
+\S3method{draw}{vlmc}(x, kind = 3, flag = TRUE, show.hidden = 0,
+     cumulative = TRUE, delta = cumulative, debug = FALSE, \dots)
 }
 \arguments{
   \item{x}{typically the result of \code{\link{vlmc}(..)}.}
-  \item{kind}{integer code for the ``kind of drawing'', in \{0,1,2,3\}.}
+  \item{kind}{integer code for the \dQuote{kind of drawing}, in \{0,1,2,3\}.}
   \item{flag}{logical; ..}
   \item{show.hidden}{integer code; if not \code{0}, give some
     indications about hidden (final) nodes .....}
@@ -23,10 +23,10 @@ draw.vlmc(x, kind=3, flag = TRUE, show.hidden = 0,
     be shown for nonterminal nodes; the `delta's can only be computed
     from the cumulative counts, i.e., \code{cumulative = FALSE} should
     be used only by the knowing one.}
-  \item{delta}{logical indicating if `delta',
-    i.e. \eqn{\delta}{delta}\eqn{(n, p(n))} should be computed and printed for
-    each (non-root) node \eqn{n} with parent \eqn{p(n)}.  Note that this
-  does not really make sense when \code{cumulative = FALSE}.}
+  \item{delta}{logical indicating if delta,
+    i.e. \eqn{\delta}{delta}\eqn{(n, p(n))} should be computed and
+    printed for each (non-root) node \eqn{n} with parent \eqn{p(n)}.  Note
+    that this does not really make sense when \code{cumulative = FALSE}.}
   \item{debug}{logical; if \code{TRUE}, some extraneous progress
     information is printed to the \R console.}
   \item{\dots}{(potentially more arguments)}
@@ -39,7 +39,7 @@ draw.vlmc(x, kind=3, flag = TRUE, show.hidden = 0,
  .............
 
  Note that the counts internally are stored ``non-cumulatively'',
- i.e. as \emph{difference} counts which is useful for likelihood (ratio)
+ i.e., as \emph{difference} counts which is useful for likelihood (ratio)
  computations.  In the internal C code, the \emph{difference} counts are
  originally computed by the \code{comp_difference()} function after tree
  generation.  \code{draw(*, cumulative = TRUE)} internally calls the C

@@ -1,4 +1,4 @@
-#### $Id: predict.R,v 1.11 2003/09/08 18:35:57 maechler Exp $
+#### $Id: predict.R,v 1.12 2013/07/25 09:30:28 maechler Exp $
 predict.vlmc <-
 function(object, newdata,
          type = c("probs", "class","response", "id.node", "depth", "ALL"),
@@ -13,7 +13,7 @@ function(object, newdata,
     ## Author: Martin Maechler, Date: 10 Apr 2000, 16:36
 
     ## o type = c("link", "response", "terms"),
-    ##		 is just `aped' from predict.glm ...
+    ##		 is just 'aped' from predict.glm ...
     ##   predict.multinom  seems better :
     ##	 	(object, newdata, type = c("class", "probs"), ...)
     ## 	probs := Pr[ X_i | context ]
@@ -35,13 +35,13 @@ function(object, newdata,
     if(missing(newdata)) {
         newdata <- object $ y
         if(is.null(newdata))
-            stop("no `newdata' specified, and object$y is NULL")
+            stop("no 'newdata' specified, and object$y is NULL")
     }
     else if(is.character(newdata)) {
 	if(!all(1 == nchar(newdata)))
 	    stop("character argument must have *all* 1-character strings")
     } else if(!(is.factor(newdata) || is.numeric(newdata)))
-        stop("`newdata' must be discrete t.s.: character, factor, or numeric (in 0:m1)")
+        stop("'newdata' must be discrete t.s.: character, factor, or numeric (in 0:m1)")
 
     if(!is.factor(newdata)) # must make sure the integer conversion is ok
         newdata <- factor(newdata, levels = alphabet)
@@ -53,12 +53,12 @@ function(object, newdata,
 	nABC <- levels(newdata) # possibly unsorted
 	alpha.len <- length(nABC)
 	if(alpha.len > object$alpha.len)
-	    stop("alphabet of `newdata' is larger than the vlmc fit `object' one")
+	    stop("alphabet of 'newdata' is larger than the vlmc fit 'object' one")
 	is.smaller <- alpha.len < object$alpha.len
 	if(is.smaller && !allow.subset)
-	    stop("alphabet of `newdata' is smaller than the vlmc fit `object' one")
+	    stop("alphabet of 'newdata' is smaller than the vlmc fit 'object' one")
 	if(any(nchar(nABC) > 1)) {
-	    nABC <- abbreviate(nABC, min=1)
+	    nABC <- abbreviate(nABC, 1)
 	    if(any(nchar(nABC) > 1))
 		nABC <-
 		    if(alpha.len <= 10) as.character(0:(alpha.len - 1))
@@ -67,8 +67,8 @@ function(object, newdata,
 	Alpha <- paste(nABC, collapse = "")
         if(Alpha != if(is.smaller) substr(object$alpha, 1,alpha.len)
         else object$alpha)
-	    warning(paste("alphabet of newdata `", Alpha,
-			  "' differs from that of the vlmc fit `",
+	    warning(paste("alphabet of newdata '", Alpha,
+			  "' differs from that of the vlmc fit '",
                           object$alpha,"'", sep=""))
     }
     m <- as.integer(object $ alpha.len)
@@ -101,7 +101,7 @@ function(object, newdata,
             data.len	= n,
             kind	= kind,
 
-            ## Output (one of these, depending on `kind'):
+            ## Output (one of these, depending on 'kind'):
             res		= res,
             flags	= flags,
             probs	= probs,
@@ -130,7 +130,7 @@ print.predict.vlmc  <- function(x, digits = getOption("digits"), ...)
 {
     if(!inherits(x,"predict.vlmc") ||
        is.null(x$probs) || is.null(x$ID) || is.null(x$ctxt))
-        stop("not a valid `predict.vlmc' object")
+        stop("not a valid 'predict.vlmc' object")
     Fprob <-
         ## MASS should be available, required in ./zzz.R
         if(exists("fractions",mode="function") # am still defensive ..
@@ -203,7 +203,7 @@ residuals.vlmc <-
     }
     else { ## type != "classwise"
         ##if(m > 2 && !quiet) ## dubious for m > 2!
-        ##warning("vlmc( m > 2 ): mostly only `classwise' residuals make sense")
+        ##warning("vlmc( m > 2 ): mostly only 'classwise' residuals make sense")
         yi <- alpha2int(y, object$alpha)
         switch(type,
                deviance = {
