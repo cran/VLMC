@@ -1,4 +1,4 @@
-/*-- $Id: vlmc_io.h,v 1.10 2001/10/03 07:56:35 maechler Exp $*/
+/*-- $Id: vlmc_io.h,v 1.11 2014/06/03 08:03:02 maechler Exp $*/
 #include <stdio.h>
 
 void draw_tree(node_t *node, node_t *super, int a, int is_last,
@@ -14,9 +14,9 @@ void f_dump_tree(node_t *node, FILE *file, int is_top, int ia,
 		 int cardX/* = alpha_len */, const char *alphabet,
 		 int ct_wid, int nmax_set);
 void f_write_tree(node_t *node, FILE *file, int debug);
-#endif
-
 
 node_t *read_tree(FILE *file, int level_check, int debug);
+#endif
+
 
 void read_data(int *data, int *data_len);/* assigns its args */

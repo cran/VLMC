@@ -8,7 +8,7 @@
 \examples{
 vlmc.version
 \dontrun{
-[1] "VLMC 1.3-13;  after $Date: 2012/09/11 17:21:35 $ UTC"
+[1] "VLMC 1.3-14;  after $Date: 2014/06/03 08:05:21 $ UTC"
 }
 }
 \keyword{data}

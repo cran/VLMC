@@ -1,4 +1,4 @@
-/* -- $Id: io.c,v 1.20 2011/12/22 17:27:31 maechler Exp $ */
+/* -- $Id: io.c,v 1.21 2014/06/03 08:02:12 maechler Exp $ */
 #include <stdio.h>
 #include <string.h>
 
@@ -303,8 +303,6 @@ void f_write_tree(node_t *node, FILE *file, int debug)
     }
 } // f_write_tree()
 
-#endif // using_files --------------------------------------------------------
-
 node_t *read_tree(FILE *file, int level_check, int debug)
 {
     /* Read a "fitted VLMC" from file and return it as tree.
@@ -316,7 +314,9 @@ node_t *read_tree(FILE *file, int level_check, int debug)
     node_t *node;
 
     if (level_check == 0) {/* very first line : Read alphabet */
-	fscanf(file, "%*s", alpha, max_alpha_len);
+	char fmt[7] = "%12345s"; // more than enough
+	sprintf(&fmt[1], "%ds", max_alpha_len);// --> "%<n>s" where <n> is max_alpha_len
+	fscanf(file, fmt, alpha);
 	alpha_len = strlen(alpha);
     }
     fscanf(file, "%d", &level); /* Read current level */
@@ -351,3 +351,6 @@ node_t *read_tree(FILE *file, int level_check, int debug)
     else /* level < 0 :	 end */
 	return NULL;
 }
+
+#endif // using_files --------------------------------------------------------
+

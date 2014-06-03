@@ -2,7 +2,8 @@ useDynLib(VLMC,
 	  vlmc_p, sim_vlmc, predict_vlmc_p,
 	  getvlmc, entropy_sub, entropy2_sub)
 
-importFrom(stats, as.dendrogram)
+importFrom('stats', as.dendrogram)
+importFrom('MASS', rational, fractions)
 
 export ("alpha2int", "alphabet", "alphabet.vlmc", "char2int"
 	, "draw"
@@ -14,9 +15,6 @@ export ("alpha2int", "alphabet", "alphabet.vlmc", "char2int"
 	, "vlmc", "vlmctree"
 	, "vlmc.version"
 	)
-
-
-## importFrom(MASS, rational, fractions)
 
 S3method(as.dendrogram, vlmc)
 S3method(deviance, vlmc)

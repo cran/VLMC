@@ -1,4 +1,4 @@
-#### $Id: predict.R,v 1.12 2013/07/25 09:30:28 maechler Exp $
+#### $Id: predict.R,v 1.13 2014/06/03 08:05:03 maechler Exp $
 predict.vlmc <-
 function(object, newdata,
          type = c("probs", "class","response", "id.node", "depth", "ALL"),
@@ -131,12 +131,7 @@ print.predict.vlmc  <- function(x, digits = getOption("digits"), ...)
     if(!inherits(x,"predict.vlmc") ||
        is.null(x$probs) || is.null(x$ID) || is.null(x$ctxt))
         stop("not a valid 'predict.vlmc' object")
-    Fprob <-
-        ## MASS should be available, required in ./zzz.R
-        if(exists("fractions",mode="function") # am still defensive ..
-           ) function(x) as.character(fractions(x))
-        else
-        function(x) format(x,digits=digits)
+    Fprob <- function(x) as.character(fractions(x))
     colnames(x$probs) <- paste("Pr[X=",colnames(x$probs),"]")
     print(noquote(cbind(fit = x$fitted,
                         Fprob(x$probs),

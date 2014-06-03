@@ -1,4 +1,4 @@
-% $Id: predict.vlmc.Rd,v 1.10 2003/10/27 18:00:43 maechler Exp $
+% $Id: predict.vlmc.Rd,v 1.11 2014/06/03 09:48:05 maechler Exp $
 \name{predict.vlmc}
 \title{Prediction of VLMC for (new) Series}
 \description{
@@ -46,11 +46,6 @@
     \code{newdata}'s alphabet with those of \code{x} is checked.}
   \item{\dots}{(potentially further arguments) required by generic.}
 }
-\note{
-  The \code{predict} method and its possible arguments are still in active
-  development, and we are considering to return the marginal
-  probabilities instead of \code{NA} for the first value(s).
-}
 \value{
   Depending on the \code{type} argument,
   \item{"probs"}{an \eqn{n \times m}{n * m} matrix \code{pm} of (prediction)
@@ -89,6 +84,17 @@
 	length.}
     }
     which has its own print method (\code{print.predict.vlmc}).}
+}
+\note{
+  The \code{predict} method and its possible arguments may still be
+  developed, and we are considering to return the marginal
+  probabilities instead of \code{NA} for the first value(s).
+
+  The \code{\link{print}} method \code{print.predict.vlmc} uses
+  \code{\link[MASS]{fractions}} from package \pkg{MASS} to display
+  the probabilities \eqn{Pr[X = j]}, for
+  \eqn{j \in \{0,1,\dots\}}{j in {0,1,...}}, as these are rational
+  numbers, shown as fractions of integers.
 }
 \seealso{\code{\link{vlmc}} and \code{\link{residuals.vlmc}}.  For
     simulation, \code{\link{simulate.vlmc}}.}

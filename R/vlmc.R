@@ -1,6 +1,6 @@
-#### $Id: vlmc.R,v 1.40 2013/07/25 09:35:56 maechler Exp $
-vlmc.version <- "VLMC 1.3-13;  after $Date: 2013/07/25 09:35:56 $ UTC"
-##		      ----- same as the one in ../DESCRIPTION !
+#### $Id: vlmc.R,v 1.41 2014/06/03 08:05:21 maechler Exp $
+vlmc.version <- "VLMC 1.3-14;  after $Date: 2014/06/03 08:05:21 $ UTC"
+##		      ------ same as the one in ../DESCRIPTION !
 
 vlmc <-
 function(dts,
