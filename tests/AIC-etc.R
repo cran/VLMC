@@ -26,9 +26,10 @@ rownames(sizes.EB) <- names(v$size)
 ## Table
 cbind(cutoff = cutoffs, t(ABIC.EB), t(sizes.EB))
 
-par(mfrow = c(2,1))
-plot(cutoffs, ABIC.EB[1,], type = "o", main = paste("AIC of", tit), log = 'xy')
-title(sub = paste("qchisq(0.95, 4 -1) / 2 = ",format(qchisq(0.95, 3) / 2)))
+if(!dev.interactive(orNone=TRUE)) pdf("AIC-etc.pdf")
+par(mfrow = c(2,1), mgp = c(1.5, .6, 0), mar = .1 + c(4,3,3,1))
+plot(cutoffs, ABIC.EB[1,], type = "o", main = paste("AIC of", tit), log = 'xy',
+     sub = paste("qchisq(0.95, 4 -1) / 2 = ",format(qchisq(0.95, 3) / 2)))
 plot(cutoffs, ABIC.EB[2,], type = "o", main = paste("BIC of", tit), log = 'xy')
 
 

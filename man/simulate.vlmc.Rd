@@ -3,15 +3,15 @@
 \title{Simulate a Discrete Time Series from fitted VLMC model}
 \description{Simulate from fitted VLMC model -- basis of the VLMC bootstrap}
 \usage{
-\method{simulate}{vlmc}(object, nsim = 1, seed = NULL,
-         n = object$n, n.start = 64 * object$size[["context"]],
+\method{simulate}{vlmc}(object, nsim = 1, seed = NULL, n,
+         n.start = 64 * object$size[["context"]],
          integer.return = FALSE, keep.RSeed = TRUE, \dots)
 }
 \arguments{
   \item{object}{typically the result of \code{\link{vlmc}(..)}.}
-  \item{nsim}{non-negative integer, giving the length of the result.}
+  \item{nsim, n}{non-negative integer, giving the length of the result.
+    Note that \code{n} is deprecated and just there for back compatibility.}
   \item{seed}{random seed initializer; see \code{\link[stats]{simulate}}.}
-  \item{n}{non-negative integer, giving the length of the result.}
   \item{n.start}{the number of initial values to be
     discarded (because of initial effects).}
   \item{integer.return}{logical; if \code{TRUE}, the result will be an
@@ -34,20 +34,31 @@
   --- actually not quite yet.
 }
 \value{
-  A vector of length \code{nsim}.  Either \code{\link{integer}} or
-  \code{\link{character}}, depending on the \code{integer.return}
-  argument, see above.
+  A \code{"simulate.vlmc"} object, basically a vector of length
+  \code{nsim}.  Either \code{\link{integer}} or \code{\link{character}},
+  depending on the \code{integer.return} argument, see above.  Further,
+  if \code{keep.RSeed} was true (as by default), a \code{"seed"} attribute
+  with the random seed at the start of the simulation, for reproducibility.
 }
 \author{Martin Maechler}
 \seealso{\code{\link{vlmc}} and \code{\link{predict.vlmc}}.}
 \examples{
 example(vlmc)
 
-simulate.vlmc(vlmc.dt1, 100)
-simulate.vlmc(vlmc.dt1c01, 100, int = TRUE)
+simulate(vlmc.dt1, 100)
+simulate(vlmc.dt1c01, 100, int = TRUE)
 # n.start = 0: 1st few observations will resemble the data
-simulate.vlmc(vlmc.dt1c01, 20, n.start=0, int = TRUE)
+simulate(vlmc.dt1c01, 20, n.start=0, int = TRUE)
 
+\dontshow{## technical consistency checks
+ww <- tools::assertWarning(sv <- simulate.vlmc(vlmc.dt1, 100))# deprecation
+s2 <- simulate(vlmc.dt1c01, 16, n.start=100, int = TRUE, keep.RSeed=FALSE)
+.Random.seed <- attr(sv,"seed")
+s3 <- simulate(vlmc.dt1, n=100)
+stopifnot(length(sv) == 100, length(s2) == 16, identical(sv, s3),
+	  grepl("deprecated", ww[[1]][["message"]]),
+	  !is.na(match(names(attributes(s2)), c("name","class"))))
+}%dont
 }
 \keyword{ts}
 \keyword{models}

@@ -1,4 +1,4 @@
-#### $Id: predict.R,v 1.13 2014/06/03 08:05:03 maechler Exp $
+#### $Id: predict.R,v 1.14 2014/10/04 13:34:46 maechler Exp $
 predict.vlmc <-
 function(object, newdata,
          type = c("probs", "class","response", "id.node", "depth", "ALL"),
@@ -93,7 +93,7 @@ function(object, newdata,
         else double(0)
 
     ## This gives the prediction Probabilities / Class / Context.Nr / Depth
-    r <- .C("predict_vlmc_p",
+    r <- .C(predict_vlmc_p,
             vlmc.vec	= as.integer(ivlmc),
             size	= length(ivlmc),
             alpha.len	= m,
@@ -106,9 +106,9 @@ function(object, newdata,
             flags	= flags,
             probs	= probs,
 
-            NAOK	= TRUE,
-            DUP		= FALSE,
-            PACKAGE	= "VLMC")[c("res","probs","flags")]
+            NAOK	= TRUE
+            ## , DUP      = FALSE ## CRAN-forbidden now
+            )[c("res", "probs", "flags")]
     if(type == "probs")
         r[["probs"]] ## was  structure(r[["probs"]], flags = r[["flags"]])
     else if(type == "ALL") {

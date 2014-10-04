@@ -1,4 +1,7 @@
-## now using NAMESPACE
+## useDynLib() in ../NAMESPACE  loads the C code
 .onLoad <- function(lib, pkg) {
-    library.dynam("VLMC",pkg,lib)
+    nms <- c("Version", "Date", "Built")
+    assign("vlmc.version",
+           paste(nms, utils::packageDescription("VLMC")[nms], sep=": "),
+	   asNamespace("VLMC"))
 }

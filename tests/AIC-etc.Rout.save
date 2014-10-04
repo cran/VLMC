@@ -1,7 +1,7 @@
 
-R version 2.10.1 RC (2009-12-12 r50714)
-Copyright (C) 2009 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
+R version 3.1.1 Patched (2014-10-01 r66703) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -18,7 +18,6 @@ Type 'q()' to quit R.
 > .proctime00 <- proc.time()
 > require(VLMC)
 Loading required package: VLMC
-Loading required package: MASS
 > 
 > ## Currently, there's also an extensive AIC example in
 > ## ../man/OZrain.Rd, i.e.  example(OZrain)
@@ -92,13 +91,17 @@ Loading required package: MASS
 [45,] 14.000 10659.96 10716.51      1       3         2    26
 [46,] 15.000 10659.96 10716.51      1       3         2    26
 > 
-> par(mfrow = c(2,1))
-> plot(cutoffs, ABIC.EB[1,], type = "o", main = paste("AIC of", tit), log = 'xy')
-> title(sub = paste("qchisq(0.95, 4 -1) / 2 = ",format(qchisq(0.95, 3) / 2)))
+> if(!dev.interactive(orNone=TRUE)) pdf("AIC-etc.pdf")
+> par(mfrow = c(2,1), mgp = c(1.5, .6, 0), mar = .1 + c(4,3,3,1))
+> plot(cutoffs, ABIC.EB[1,], type = "o", main = paste("AIC of", tit), log = 'xy',
++      sub = paste("qchisq(0.95, 4 -1) / 2 = ",format(qchisq(0.95, 3) / 2)))
 > plot(cutoffs, ABIC.EB[2,], type = "o", main = paste("BIC of", tit), log = 'xy')
 > 
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  1.144 0.008 2.262 0 0 
+Time elapsed:  0.63 0.016 0.643 0 0 
 > 
+> proc.time()
+   user  system elapsed 
+  0.864   0.038   0.883 

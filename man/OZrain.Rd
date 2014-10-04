@@ -84,13 +84,8 @@ hist(OZrain)
 hist(OZrain, breaks = c(0,1,5,10,50,1000), xlim = c(0,100))
 
 plot(OZrain, main = "Rainfall 1981-1990 in Melbourne")
-## work around bug in plot.ts() for R <= 1.3.1 :
-newer1.4 <- {v <- R.version; v$major > 1 || as.numeric(v$minor) >= 4.2}
-if(newer1.4) {
-  plot(OZrain, log="y", main = "Non-0 Rainfall [LOG scale]")
-} else
-  plot.ts(time(OZrain)[has.rain],
-          OZrain[has.rain], log="y", main = "Non-0 Rainfall [LOG scale]")
+plot(OZrain, log="y", main = "Non-0 Rainfall [LOG scale]")
+
 lOZ <- lowess(log10(OZrain[has.rain]), f= .05)
 lines(time(OZrain)[has.rain], 10^lOZ$y, col = 2, lwd = 2)
 }

@@ -1,8 +1,10 @@
 useDynLib(VLMC,
-	  vlmc_p, sim_vlmc, predict_vlmc_p,
-	  getvlmc, entropy_sub, entropy2_sub)
+	  draw_p, vlmc_p, vlmc_sim, predict_vlmc_p,
+	  getvlmc, vlmc_entropy, vlmc_entropy2)
+## TODO:  .registration = TRUE
 
 importFrom('stats', as.dendrogram)
+importFrom('utils', str, packageDescription)
 importFrom('MASS', rational, fractions)
 
 export ("alpha2int", "alphabet", "alphabet.vlmc", "char2int"
@@ -24,12 +26,13 @@ S3method(predict, vlmc)
 S3method(summary, vlmc)
 S3method(residuals, vlmc)
 S3method(logLik, vlmc)
-##> we have advertized simulate.vlmc() .. still??
+##> have advertized simulate.vlmc() for years; *deprecation* in Oct.2014
 ##> S3method(simulate, vlmc)
 S3method(str, vtree)# <- vlmctree()
 
 S3method(print, vlmc)
 S3method(print, predict.vlmc)
 S3method(print, summary.vlmc)
+S3method(print, simulate.vlmc)
 
 

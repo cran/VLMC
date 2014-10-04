@@ -1,7 +1,3 @@
-#### $Id: vlmc.R,v 1.41 2014/06/03 08:05:21 maechler Exp $
-vlmc.version <- "VLMC 1.3-14;  after $Date: 2014/06/03 08:05:21 $ UTC"
-##		      ------ same as the one in ../DESCRIPTION !
-
 vlmc <-
 function(dts,
 	 cutoff.prune =
@@ -17,7 +13,7 @@ function(dts,
   ## ----------------------------------------------------------------------
   ## Arguments: dts : numeric / character / factor
   ## ----------------------------------------------------------------------
-  ## Author: Martin Mächler, Date: 17 Mar 2000
+  ## Author: Martin MÃ¤chler, Date: 17 Mar 2000
 
   cl <- match.call()
   if(!is.atomic(dts))
@@ -78,7 +74,7 @@ function(dts,
   }
   if(debug) cat("vlmc: ctl.dump = ",ctl.dump,"\n")
 
-  r <- .C("vlmc_p",
+  r <- .C(vlmc_p,
 	  data	 = Data,
 	  nobs	 = n,
 	  threshold.gen= as.integer(threshold.gen),
@@ -87,28 +83,22 @@ function(dts,
 	  alpha	       = as.character(Alpha),
 	  debug	     = as.integer(as.logical(debug)),
 	  dump.flags = as.integer(c(dump, ctl.dump)),
-
-	  size = integer(4),
-	  ## Not allowed because of character variable (alpha):
-	  ## DUP = FALSE,
-	  PACKAGE = "VLMC")
+	  size = integer(4))[c("nobs", "threshold.gen", "cutoff.prune",
+				"alpha.len", "alpha", "size")]
   ## Now that we know the size of the result, we can "give" the space,
   ## and put the result tree (as integer vector) into it:
   names(r$size) <- c("total","nr.leaves","context","ord.MC")
   r$size <- rev(r$size)
-  rvec <- .C("getvlmc",
+  rvec <- .C(getvlmc,
 	     size = r$size["total"],
-	     vlmc.vec = integer(r$size["total"]),
-	     ##DUP = FALSE,
-	     PACKAGE = "VLMC")$vlmc
+	     vlmc.vec = integer(r$size["total"]))$vlmc
 
   ## Consistency checks (catch some programming errors):
   if(alpha.len != rvec[1])
-      warning(paste(".C(\"vlmc\"..) : |alphabet| inconsistency:",
+      warning(paste(".C(vlmc, ...) : |alphabet| inconsistency:",
 		    alpha.len, "!=", rvec[1]))
   r$vlmc.vec <- rvec
   if(y) r$y <- alphabet[1L + Data]
-  r$data <- r$debug <- r$dump.flags <- NULL
   r$call <- cl
   class(r) <- "vlmc"
   r
@@ -121,18 +111,18 @@ print.vlmc <- function(x, digits = max(3, getOption("digits") - 3), ...)
 {
   ## Purpose: "print" Method for "vlmc" objects
   ## ----------------------------------------------------------------------
-  ## Author: Martin Mächler, Date: 18 Mar 00, 11:26
+  ## Author: Martin MÃ¤chler, Date: 18 Mar 00, 11:26
   if(!is.vlmc(x)) stop("first argument must be a \"vlmc\" object; see ?vlmc")
   ox <- x
   vvec <- (x $ vlmc.vec)#.Alias
   used.args <- names(x$call)
+  dflt.c <- !any(used.args %in% c("cutoff.prune","alpha.c"))
   cat("\n", sQuote('vlmc')," a Variable Length Markov Chain;\n",
       "\t alphabet '", x$alpha, "', |alphabet| = ",x$alpha.len,
-      ", n = ",x$n,".\nCall: ",deparse(x$call),
-      if(!any(used.args %in% c("cutoff.prune","alpha.c")))
-      paste(";	default cutoff =", format(x$cutoff,digits=digits)),
+      ", n = ",x$n,".\nCall: ",deparse(x$call), ";  ",
+      if(dflt.c) "default ", "cutoff =", format(x$cutoff, digits=digits),
       ##";  |result| = ", length(vvec), ", MC order = ", x$size[4],
-      "\n -> extensions (= $size ) :\n",sep="")
+      "\n -> extensions (= $size ) :\n", sep="")
   print(x $ size)
   cat("AIC = ", format(AIC(x), digits = digits), "\n")
   invisible(ox)
@@ -149,7 +139,7 @@ summary.vlmc <- function(object, ...)
 {
   ## Purpose: "summary" Method for "vlmc" objects
   ## -----------------------------------------------------------
-  ## Author: Martin Mächler, Date: 1 Apr 00, 11:26
+  ## Author: Martin MÃ¤chler, Date: 1 Apr 00, 11:26
 
     p <- predict(object, type = "class")
     conf.tab <- table(data = object$y, predicted = p)
@@ -165,7 +155,7 @@ print.summary.vlmc <-
 {
   ## Purpose: "print" Method for "vlmc.summary" objects
   ## -----------------------------------------------------------
-  ## Author: Martin Mächler, Date: 1 Apr 00, 11:30
+  ## Author: Martin MÃ¤chler, Date: 1 Apr 00, 11:30
 
   print.vlmc(x, digits = digits, ...)
   cat("R^2 = %{correctly predicted} = ",
@@ -203,7 +193,7 @@ prt.vvec <- function(v, nalph, pad = " ")
 {
   ## Purpose: RECURSIVEly print result vector of a vlmc -- not knowing alphabet
   ## ----------------------------------------------------------------------
-  ## Author: Martin Mächler, Date: 18 Mar 00, 16:53
+  ## Author: Martin MÃ¤chler, Date: 18 Mar 00, 16:53
   lv <- length(v)
   if(!lv) {
     cat("\n"); return()

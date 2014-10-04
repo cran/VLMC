@@ -1,6 +1,6 @@
 ## Purpose: Entropy of a fitted "vlmc" object, see ?vlmc
 ## ------------------------------------------------------------------------
-## $Id: entropy.R,v 1.11 2013/07/25 09:30:28 maechler Exp $
+## $Id: entropy.R,v 1.12 2014/10/04 12:36:42 maechler Exp $
 ## Author: Martin Maechler, Date:  5 Apr 2000, 18:31
 
 ## Entropy  ===  Log[Likelihood] !
@@ -8,14 +8,7 @@ entropy <- function(object)
 {
     if(!is.vlmc(object))
         stop("first argument must be a \"vlmc\" object; see ?vlmc")
-    ivlmc <- object $ vlmc
-    .C("entropy_sub",
-       vlmc.vec     = as.integer(ivlmc),
-       size         = length(ivlmc),
-       alpha.len    = as.integer(object$ alpha.len),
-       r = double(1),
-       DUP = FALSE,
-       PACKAGE = "VLMC")$r
+    .Call(vlmc_entropy, object $ vlmc)
 }
 
 logLik.vlmc <- function(object, ...)
@@ -41,24 +34,5 @@ entropy2 <- function(ivlmc1, ivlmc2, alpha.len = ivlmc1[1])
     if(ivlmc2[1] != alpha.len)
         stop("alphabet length differs for 2nd arg")
 
-    ##-- no checks, we really use the integer vectors themselves ..
-    .C("entropy2_sub",
-       vlmc.vec     = as.integer(ivlmc1), size = length(ivlmc1),
-       vlmc2.vec    = as.integer(ivlmc2), size = length(ivlmc2),
-       alpha.len    = alpha.len,
-       r = double(1),
-       DUP = FALSE,
-       PACKAGE = "VLMC")$r
+    .Call(vlmc_entropy2, ivlmc1, ivlmc2)
 }
-
-## Purpose: Akaike Information Criterion for VLMC objects
-## -------------------------------------------------------------------------
-## Arguments: VLMC object
-## -------------------------------------------------------------------------
-## Author: Martin Maechler, Date: 21 Dec 2000
-
-##Now in R:  AIC <- function (object, ...) UseMethod()
-
-## for R versions < 1.4:
-if(paste(R.version$major, R.version$minor, sep=".") < 1.4)
-    AIC.vlmc <- (AIC.lm)#.Alias

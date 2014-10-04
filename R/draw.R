@@ -15,7 +15,7 @@ function(x, kind = 3,
       stop("first argument must be a \"vlmc\" object; see ?vlmc")
   ivlmc <- x $ vlmc
   invisible(
-  .C("draw_p",
+  .C(draw_p,
      vlmc.vec     = as.integer(ivlmc),
      size         = length(ivlmc),
      alpha.len    = as.integer  (x$ alpha.len),
@@ -26,9 +26,6 @@ function(x, kind = 3,
      kind         = as.integer(kind),
      show.hidden  = as.integer(show.hidden),
      cumulative   = as.logical(cumulative),
-     delta        = as.logical(delta),
-     ## Not allowed because of character variable (alpha):
-     ## DUP = FALSE,
-     PACKAGE = "VLMC")
-            )
+     delta        = as.logical(delta)))
+
 }

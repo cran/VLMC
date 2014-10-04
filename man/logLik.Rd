@@ -42,7 +42,11 @@ entropy2(ivlmc1, ivlmc2, alpha.len = ivlmc1[1])
 \examples{
 dd <- cumsum(rpois(999, 1.5)) \%\% 10
 (vd <- vlmc(dd))
+entropy(vd)# the bare number
 logLik(vd)
+logLik(vdL <- vlmc(dd, cutoff = 3))
+entropy2(vd $vlmc.vec,
+         vdL$vlmc.vec)
 
 ## AIC model selection:
 f1 <- c(1,0,0,0)  # as in example(vlmc)
