@@ -13,13 +13,13 @@ function(dts,
   ## ----------------------------------------------------------------------
   ## Arguments: dts : numeric / character / factor
   ## ----------------------------------------------------------------------
-  ## Author: Martin Mächler, Date: 17 Mar 2000
+  ## Author: Martin Maechler, Date: 17 Mar 2000
 
   cl <- match.call()
   if(!is.atomic(dts))
       stop("vlmc() only works on vectors (integer, character, factor)")
   if(is.character(dts)) {
-    if(!all(i1 <- (1 == (nc <- nchar(dts)))))
+    if(!all(1 == nchar(dts)))
         ## FIXME, change this to a 'note()'!
       warning("character argument has elements of more than 1 character")
   }
@@ -111,10 +111,10 @@ print.vlmc <- function(x, digits = max(3, getOption("digits") - 3), ...)
 {
   ## Purpose: "print" Method for "vlmc" objects
   ## ----------------------------------------------------------------------
-  ## Author: Martin Mächler, Date: 18 Mar 00, 11:26
+  ## Author: Martin Maechler, Date: 18 Mar 00, 11:26
   if(!is.vlmc(x)) stop("first argument must be a \"vlmc\" object; see ?vlmc")
   ox <- x
-  vvec <- (x $ vlmc.vec)#.Alias
+  ## vvec <- (x $ vlmc.vec)#.Alias
   used.args <- names(x$call)
   dflt.c <- !any(used.args %in% c("cutoff.prune","alpha.c"))
   cat("\n", sQuote('vlmc')," a Variable Length Markov Chain;\n",
@@ -139,7 +139,7 @@ summary.vlmc <- function(object, ...)
 {
   ## Purpose: "summary" Method for "vlmc" objects
   ## -----------------------------------------------------------
-  ## Author: Martin Mächler, Date: 1 Apr 00, 11:26
+  ## Author: Martin Maechler, Date: 1 Apr 00, 11:26
 
     p <- predict(object, type = "class")
     conf.tab <- table(data = object$y, predicted = p)
@@ -155,7 +155,7 @@ print.summary.vlmc <-
 {
   ## Purpose: "print" Method for "vlmc.summary" objects
   ## -----------------------------------------------------------
-  ## Author: Martin Mächler, Date: 1 Apr 00, 11:30
+  ## Author: Martin Maechler, Date: 1 Apr 00, 11:30
 
   print.vlmc(x, digits = digits, ...)
   cat("R^2 = %{correctly predicted} = ",
@@ -193,7 +193,7 @@ prt.vvec <- function(v, nalph, pad = " ")
 {
   ## Purpose: RECURSIVEly print result vector of a vlmc -- not knowing alphabet
   ## ----------------------------------------------------------------------
-  ## Author: Martin Mächler, Date: 18 Mar 00, 16:53
+  ## Author: Martin Maechler, Date: 18 Mar 00, 16:53
   lv <- length(v)
   if(!lv) {
     cat("\n"); return()

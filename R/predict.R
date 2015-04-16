@@ -1,4 +1,4 @@
-#### $Id: predict.R,v 1.14 2014/10/04 13:34:46 maechler Exp $
+#### $Id: predict.R,v 1.15 2015/04/16 16:22:33 maechler Exp $
 predict.vlmc <-
 function(object, newdata,
          type = c("probs", "class","response", "id.node", "depth", "ALL"),
@@ -47,7 +47,7 @@ function(object, newdata,
         newdata <- factor(newdata, levels = alphabet)
     ## newdata is now a factor
     n <- length(newdata)
-    int.data <- as.integer(newdata) - as.integer(1)
+    int.data <- as.integer(newdata) - 1L
 
     if(check.alphabet) {
 	nABC <- levels(newdata) # possibly unsorted

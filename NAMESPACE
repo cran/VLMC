@@ -3,7 +3,7 @@ useDynLib(VLMC,
 	  getvlmc, vlmc_entropy, vlmc_entropy2)
 ## TODO:  .registration = TRUE
 
-importFrom('stats', as.dendrogram)
+importFrom('stats', as.dendrogram, simulate)
 importFrom('utils', str, packageDescription)
 importFrom('MASS', rational, fractions)
 
@@ -18,11 +18,13 @@ export ("alpha2int", "alphabet", "alphabet.vlmc", "char2int"
 	, "vlmc.version"
 	)
 
+S3method(alphabet, vlmc)
 S3method(as.dendrogram, vlmc)
 S3method(deviance, vlmc)
 S3method(draw, vlmc)
 S3method(fitted, vlmc)
 S3method(predict, vlmc)
+S3method(simulate, vlmc)
 S3method(summary, vlmc)
 S3method(residuals, vlmc)
 S3method(logLik, vlmc)

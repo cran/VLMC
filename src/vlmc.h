@@ -1,4 +1,4 @@
-/* -- $Id: vlmc.h,v 1.19 2002/02/08 08:07:41 maechler Exp $ */
+/* -- $Id: vlmc.h,v 1.20 2015/04/16 16:20:47 maechler Exp $ */
 
 #ifndef VLMC
 #define VLMC

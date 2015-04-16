@@ -12,7 +12,8 @@ vlmctree <- function(x)
   k <- (x $ alpha.len)#.Alias
   if(vvec[1] != k) stop("invalid vlmc structure {alpha.len}")
 
-  vtree <- .vvec2tree(vvec[-1], k = vvec[1], chk.lev = 0)
+  ## return vtree :
+  .vvec2tree(vvec[-1], k = vvec[1], chk.lev = 0)
 }
 
 .vvec2tree <- function(vv, k, chk.lev)

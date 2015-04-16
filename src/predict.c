@@ -8,7 +8,7 @@
 /* This is the C-like version : */
 void predict_vlmc(int vlmc_vec[], int size_vlmc,
 		  int m, /* = alpha_len */
-		  int data[],	int data_len,
+		  int data[], int data_len,
 		  vlmc_pred_type pred_kind,
 
 		  /* Output : prb_mat[] only if pred_kind has "probs" */
@@ -105,8 +105,12 @@ TODO :
     for (i = 1; i < n; i++) {
 
 	/* Find the context, descending the tree, given y[i-1], y[i-2],... :*/
+	int di;
 	for (q1 = top, level = 1;
-	     level <= i && (q2 = q1->child[data[i - level]]) != NULL;
+	     level <= i &&
+		 // ensure that child[.] indexing is kosher :
+		 0 <= (di = data[i - level]) && di < q1->count &&
+		 (q2 = q1->child[di]) != NULL;
 	     q1 = q2, level++);
 	/* Usually, now level <= i and found terminal node (q2 = NULL) */
 
@@ -161,7 +165,7 @@ TODO :
 /* This version is called from R/S -- "_p" := has all pointers : */
 void predict_vlmc_p(int* vlmc_vec, int* size_vlmc,
 		    int* m, /* = alpha_len */
-		    int* data,	int* data_len,
+		    int* data, int* data_len,
 		    vlmc_pred_type* pred_kind,
 
 		    /* Output : either one, chosen via pred_kind */
@@ -169,8 +173,7 @@ void predict_vlmc_p(int* vlmc_vec, int* size_vlmc,
 		    int* flags,
 		    double* prb_mat)
 {
-    predict_vlmc(vlmc_vec, size_vlmc[0],	m[0],
-		 data,	data_len[0],	pred_kind[0],
-
+    predict_vlmc(vlmc_vec, size_vlmc[0], m[0],
+		 data, data_len[0], pred_kind[0],
 		 result, flags, prb_mat);
 }

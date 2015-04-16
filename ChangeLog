@@ -1,3 +1,11 @@
+2015-04-16  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.4-1
+
+	* src/predict.c (predict_vlmc): careful for "constant data":
+	alpa_len == m == 1 !
+
+
 2014-10-04  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* R/sim.R: drop "wrong" 'n' argument; add simple class(.) and a

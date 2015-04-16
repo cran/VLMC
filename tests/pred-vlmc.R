@@ -73,4 +73,10 @@ prm <- cbind(fit   = predict(vlmc.dt2c0, dt3, type = "response"),
               flags = attr(pr,"flags"))
 noquote(cbind(prm, context = id2ctxt(pid, m=2, alpha=TRUE)))
 
+## Constant data prediction:  |alphabet| = 1 (!!)
+mod <- vlmc(rep(1, 99))
+pr <- predict(mod, c(1, 0, 1))  # crash did occur here (in C code)
+stopifnot(pr[-1] == 1)
+
+
 cat("Time elapsed:", format(proc.time() - c0),"\n")
