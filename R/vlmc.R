@@ -95,7 +95,7 @@ function(dts,
 
   ## Consistency checks (catch some programming errors):
   if(alpha.len != rvec[1])
-      warning(paste(".C(vlmc, ...) : |alphabet| inconsistency:",
+      warning(paste(".C(getvlmc, ...) : |alphabet| inconsistency:",
 		    alpha.len, "!=", rvec[1]))
   r$vlmc.vec <- rvec
   if(y) r$y <- alphabet[1L + Data]

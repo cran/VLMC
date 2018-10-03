@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: cutoffs.c,v 1.1 2018/10/02 16:37:37 maechler Exp $
  * cutoffs() -- return a vector of all active cutoff values
  *              for a given fitted VLMC, i.e. the delta values that are
  *		to be active in cutoff-comparison when pruning the tree

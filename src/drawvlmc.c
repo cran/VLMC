@@ -1,4 +1,4 @@
-/* -- $Id: drawvlmc.c,v 1.11 2002/11/29 10:42:39 maechler Exp $
+/* -- $Id: drawvlmc.c,v 1.12 2018/10/02 16:37:37 maechler Exp $
  * -- draw_sub.v --- Subroutine instead of main program
  * -- was ../../draw.c,v 1.9 2000/03/17 17:13:12 maechler
 */
@@ -8,11 +8,12 @@
 # include <unistd.h>
 #endif
 
-#include "vlmc.h"
 #include "vlmc_io.h"
 #include "subutil.h"
 
 #include "alphabet.h"
+
+#include "vlmc_R_pkg.h"
 
 /* To be called from R/S : */
 

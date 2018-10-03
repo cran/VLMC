@@ -74,7 +74,9 @@ void save_tree(node_t *node, int *SAFE, int *free_safe,
     else { /* non-leaf node */
 	lev = node->level;
 	if (debug) {
-	    for(i=0; i < lev; i++) REprintf("%2c", ' '); REprintf("{%d}", lev);
+	    for(i=0; i < lev; i++)
+		REprintf("%2c", ' ');
+	    REprintf("{%d}", lev);
 	}
 
 	if (lev == 0) {/* very first : alphabet size */

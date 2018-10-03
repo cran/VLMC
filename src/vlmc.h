@@ -1,7 +1,7 @@
-/* -- $Id: vlmc.h,v 1.20 2015/04/16 16:20:47 maechler Exp $ */
+/* -- $Id: vlmc.h,v 1.23 2018/10/03 09:16:40 maechler Exp $ */
 
-#ifndef VLMC
-#define VLMC
+#ifndef VLMC_H
+#define VLMC_H
 
 #ifdef MemTrace
 # include "mcheck.h"
@@ -51,23 +51,11 @@ extern char alpha[];
 # define Free(p) 		(free( (void *)(p) ), (p) = NULL)
 
 
-#else /*------------ R package or S(plus) library section ---*/
-
-# include <S.h>
-
-# ifdef USING_R
+#else //------------ R package
 
 #  include <R.h>
 #  include <R_ext/RS.h>
 #  include <R_ext/PrtUtil.h>
-
-# else /* S library section */
-
-   /* S.h is already there ... */
-#   define REprintf(fmt,x) 	fprintf(stderr,fmt,x)
-#   define Rprintf(fmt,x) 	printf(fmt,x)
-
-# endif /*-- R / S --*/
 
 # define Rprintf0(x) 	        Rprintf(x)
 # define Rprintf2(fmt,x,x2) 	Rprintf(fmt,x,x2)
@@ -78,7 +66,7 @@ extern char alpha[];
 # define VLMC_WARNING2(fmt,x,x2)	warning(fmt,x,x2)
 # define VLMC_WARNING3(fmt,x,x2,x3)     warning(fmt,x,x2,x3)
 
-#endif /*-- Standalone / R|S --*/
+#endif /*-- Standalone / R --*/
 
 
 /* ------------- TYPE  Definitions -----------*/

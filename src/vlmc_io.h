@@ -1,5 +1,7 @@
-/*-- $Id: vlmc_io.h,v 1.11 2014/06/03 08:03:02 maechler Exp $*/
+/*-- $Id: vlmc_io.h,v 1.12 2018/10/03 09:16:40 maechler Exp $*/
 #include <stdio.h>
+
+#include "vlmc.h"
 
 void draw_tree(node_t *node, node_t *super, int a, int is_last,
 	       int kind, int show_hidden, int do_delta, int debug);

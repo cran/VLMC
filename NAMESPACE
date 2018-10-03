@@ -1,11 +1,12 @@
-useDynLib(VLMC,
-	  draw_p, vlmc_p, vlmc_sim, predict_vlmc_p,
-	  getvlmc, vlmc_entropy, vlmc_entropy2)
-## TODO:  .registration = TRUE
+useDynLib(VLMC, .registration = TRUE)
 
-importFrom('stats', as.dendrogram, simulate)
+
+importFrom('graphics', abline, mtext, par, plot, plot.new, plot.window, strwidth, text)
+importFrom('stats', as.dendrogram, AIC, predict, qchisq, residuals, runif, simulate)
 importFrom('utils', str, packageDescription)
 importFrom('MASS', rational, fractions)
+
+
 
 export ("alpha2int", "alphabet", "alphabet.vlmc", "char2int"
 	, "draw"

@@ -1,3 +1,8 @@
+2018-10-03  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.4-2: add registration (of C code
+	  called); also import everything needed (incl from std. packages).
+
 2015-04-16  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): 1.4-1

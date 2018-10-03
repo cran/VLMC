@@ -1,4 +1,4 @@
-/*-- $Id: fitvlmc.c,v 1.19 2013/07/25 09:37:24 maechler Exp $
+/*-- $Id: fitvlmc.c,v 1.20 2018/10/02 16:37:37 maechler Exp $
  * -- tree_sub.c --- Subroutine instead of main program
  * -- was ../../tree.c : tree.c,v 1.9 2000/03/17 17:13:12 maechler Exp maechler
  */
@@ -10,6 +10,9 @@
 #include "subutil.h"
 
 #include "alphabet.h" /* extern  alpha_len & alpha[] */
+
+#include "vlmc_R_pkg.h"
+
 
 /*=========== GLOBAL Variables : ==============*/
 int *data;

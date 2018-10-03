@@ -1,13 +1,14 @@
-/* -- $Id: entropy.c,v 1.9 2014/10/04 12:36:42 maechler Exp $ */
+/* -- $Id: entropy.c,v 1.10 2018/10/02 16:37:37 maechler Exp $ */
 #include <math.h>
-
-#include "vlmc.h"
-#include "subutil.h"
 
 #include <R.h>
 #include <Rinternals.h>
 
-/* Export the routintes to be called from R / S-plus.
+#include "subutil.h"
+#include "vlmc_R_pkg.h"
+
+
+/* Export the routines to be called from R / S-plus.
  *
  * entropy() and entropy2() are in ./util.c
  */

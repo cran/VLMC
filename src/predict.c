@@ -1,9 +1,8 @@
 /* R/S callable subroutine -- similar to main program ../../predict.c */
 
-#include "vlmc.h"
 /*#include "vlmc_io.h"*/
 #include "subutil.h"
-#include "predict.h"
+#include "vlmc_R_pkg.h"
 
 /* This is the C-like version : */
 void predict_vlmc(int vlmc_vec[], int size_vlmc,

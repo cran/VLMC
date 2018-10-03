@@ -1,16 +1,11 @@
-/* -- $Id: sim.c,v 1.7 2014/10/04 15:21:01 maechler Exp $
+/* -- $Id: sim.c,v 1.11 2018/10/02 16:37:37 maechler Exp $
    R/S callable subroutine -- similar to main program ../../simvlmc.c
 */
-#include "vlmc.h"
-#include "subutil.h"
-
 #include <Rinternals.h>
+#include <R_ext/Random.h>
 
-/* try to do things to be (somewhat) portable between S & R ... */
-#include <S.h>
-/* instead of
- #include <R_ext/Random.h>
-*/
+#include "subutil.h"
+#include "vlmc_R_pkg.h"
 
 SEXP vlmc_sim(SEXP vlmc_R, SEXP nsim_)
 {
@@ -28,8 +23,7 @@ SEXP vlmc_sim(SEXP vlmc_R, SEXP nsim_)
 
     node_t *top = load_tree(INTEGER(vlmc_R), &next_ind, LENGTH(vlmc_R),
 		    /*level*/ 0, /*Debug*/ 0);
-    long unused;
-    seed_in(&unused);/* i.e. GetRNGstate() */
+    GetRNGstate();
 
     for (int i = 0; i < N; i++) {
 	/* Find the context, descending the tree, given y[i-1], y[i-2],... : */
@@ -48,7 +42,7 @@ SEXP vlmc_sim(SEXP vlmc_R, SEXP nsim_)
 	    }
 	}
     }
-    seed_out(&unused);/* i.e. PutRNGstate() */
+    PutRNGstate();
 
     free_node(top);/* do not leak ! */
     UNPROTECT(nprot);
