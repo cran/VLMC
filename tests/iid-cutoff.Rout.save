@@ -1,7 +1,7 @@
 
-R version 3.1.1 Patched (2014-10-01 r66703) -- "Sock it to Me"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-unknown-linux-gnu (64-bit)
+R version 3.6.0 RC (2019-04-24 r76422) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -48,10 +48,10 @@ AIC =  7485
 > ur.nms <- c("root", "f.root", "iter", "estim.prec")
 > r <- matrix(NA, length(ur.nms), N,
 +             dimnames = list(ur.nms, NULL))
-> RNGversion("1.6")
+> RNGversion("3.5.0")# + warning .. FIXME once we depend on R >= 3.6.0
 Warning message:
-In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
-  buggy version of Kinderman-Ramage generator used
+In RNGkind("Mersenne-Twister", "Inversion", "Rounding") :
+  non-uniform 'Rounding' sampler used
 > set.seed(6352)
 > for(i in 1:N) {
 +     sr4 <- sample(rain4c)# random permutation -- should be iid!
@@ -62,9 +62,9 @@ In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
 > r <- t(r)
 > summary( r[,"root"]) # astonishingly wide; Q1--Q3 =  5.41--6.64
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  4.254   5.172   5.888   6.093   6.527   9.428 
+  4.412   5.439   5.996   6.232   6.823  10.494 
 > sqrt(var(r[,"root"]))/ sqrt(N) # 0.14
-[1] 0.1401093
+[1] 0.1445622
 > 
 > if(!dev.interactive(orNone=TRUE)) pdf("iid-cutoff.pdf")
 > hist(r[,"root"], xlab = "vlmc - cutoff",
@@ -73,8 +73,8 @@ In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  10.88 0.111 11 0 0 
+Time elapsed:  4.037 0.043 4.095 0 0 
 > 
 > proc.time()
    user  system elapsed 
- 11.114   0.147  11.252 
+  4.139   0.069   4.280 

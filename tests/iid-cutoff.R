@@ -20,7 +20,7 @@ N <- 64# had 200
 ur.nms <- c("root", "f.root", "iter", "estim.prec")
 r <- matrix(NA, length(ur.nms), N,
             dimnames = list(ur.nms, NULL))
-RNGversion("1.6")
+RNGversion("3.5.0")# + warning .. FIXME once we depend on R >= 3.6.0
 set.seed(6352)
 for(i in 1:N) {
     sr4 <- sample(rain4c)# random permutation -- should be iid!
