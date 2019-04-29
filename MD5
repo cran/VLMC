@@ -1,5 +1,5 @@
 2b6b4cf4bab810b088d73cdafb319f53 *ChangeLog
-3df1f4ad66d0f5653e4a37f764c4464d *DESCRIPTION
+09555d7a987339324496c85749aeae73 *DESCRIPTION
 9c0dbf47ef9097b472238a2815b51565 *NAMESPACE
 b5dc25f5ad2d8679f1e0c002de662349 *R/alphabet.R
 f98c21ef14f3f52a7c7336934ceeda7a *R/conversion.R
@@ -39,14 +39,14 @@ dbaa7b825500d8db9bfbb1addc3b1a14 *man/summary.vlmc.Rd
 70d269b810d7fe74a242c6782ad5e514 *src/alphabet.h
 affd412ab1905ab70da8396f5dfc046e *src/cutoffs.c
 ce04c8c84a408c3c014b8f094ed94819 *src/data.c
-e46036d0657033bffca5112f7dc977d0 *src/drawvlmc.c
+7e98f645692c0697b0d56ae680485f99 *src/drawvlmc.c
 072203d03b98c86ed1b5ce8a57a39bca *src/entropy.c
 5c00ed1e841a6c29b81d97353700e388 *src/fitvlmc.c
 abb7ef4a60d25c76a3f5f06053e5efa6 *src/gen.c
 05a34f3d7d970a926ead9050b812fe9d *src/init.c
 d0db2017c41db4d67888c433bec8b03d *src/init_alpha.c
 74b268bc9e32cf5b0452a43f6e0a4aea *src/io.c
-a6ddffb1701174a037bf2d107eea40f1 *src/predict.c
+1a3c0e3193e7d4716d32d2016b704127 *src/predict.c
 d57d30a207e598e99d6916d6ec32e4cd *src/prune.c
 43682e84bf41abb39ab40ffcd2c30ed5 *src/saveload.c
 7506cca9d7d2c466ad2f539202c101d4 *src/sim.c

@@ -40,7 +40,7 @@ void draw(const int vlmc_vec[], int size_vlmc,
   vlmcinit_alpha(Alpha_len, Alpha);
 
   if(Debug)
-      REprintf(" draw(..) -- before load_tree(): alpha = «%s»\n", alpha);
+      REprintf(" draw(..) -- before load_tree(): alpha = Â«%sÂ»\n", alpha);
 
   top = load_tree(vlmc_vec, &next_ind, size_vlmc, /*level*/0, Debug);
   /*    --------- -> ./saveload.c */

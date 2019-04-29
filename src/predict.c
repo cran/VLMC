@@ -108,7 +108,7 @@ TODO :
 	for (q1 = top, level = 1;
 	     level <= i &&
 		 // ensure that child[.] indexing is kosher :
-		 0 <= (di = data[i - level]) && di < q1->count &&
+		 0 <= (di = data[i - level]) && di < m && // 'di < m' was 'di < q1->count' nonsensical
 		 (q2 = q1->child[di]) != NULL;
 	     q1 = q2, level++);
 	/* Usually, now level <= i and found terminal node (q2 = NULL) */
@@ -145,7 +145,7 @@ TODO :
 	    result[i] = level - 1;
 	}
 
-	if(!(pred_kind && (PROBS|CLASS|ID|LEVEL)))
+	if(!(pred_kind & (PROBS|CLASS|ID|LEVEL)))
 	    VLMC_ERROR(".C(\"pred..\"..): invalid prediction kind %d;",
 		       pred_kind);
 
