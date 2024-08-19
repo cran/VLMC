@@ -1,8 +1,8 @@
-% $Id: draw.vlmc.Rd,v 1.9 2011/12/22 18:06:16 maechler Exp $
+% $Id: draw.vlmc.Rd,v 1.10 2024/08/09 12:33:58 maechler Exp $
 \name{draw.vlmc}
 \alias{draw.vlmc}
 \alias{draw}
-\title{Draw a "VLMC" Object (in ASCII) as tree.}
+\title{Draw a "VLMC" Object (in ASCII) as Tree}
 \description{
   Draws a \code{vlmc} object, typically the result of
   \code{\link{vlmc}(.)}, to the \R console,

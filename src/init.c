@@ -6,10 +6,10 @@
 #include "vlmc_R_pkg.h"
 // --> "vlmc.h"
 
-#define CDEF(name)  {#name, (DL_FUNC) &name, sizeof(name ## _t)/sizeof(name ## _t[0]), name ##_t}
+#define CDEF(name)  {#name, (DL_FUNC) &name, sizeof(name ## _typ)/sizeof(name ## _typ[0]), name ##_typ}
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
 
-/* "FIXME": define drap_p_t  headers and use  CDEF(....),
+/* "FIXME": define draw_p_typ  headers and use  CDEF(....),
 
    as e.g., in package  cluster
 */

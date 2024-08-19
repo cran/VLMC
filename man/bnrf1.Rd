@@ -17,15 +17,16 @@
   \code{c("a","c","g","t")}.
 }
 \source{
-  See the references, data are online at
-  \url{http://anson.ucdavis.edu/~shumway/tsa.html}
+  See the references; data used to be at
+  \verb{https://anson.ucdavis.edu/~shumway/tsa.html}, and are now available
+  in CRAN package \CRANpkg{astsa}, e.g., \code{\link[astsa]{bnrf1ebv}}.
 }
 \references{
   Shumway, R. and Stoffer, D. (2000)
   \emph{Time Series Analysis and its Applications}.
   Springer Texts in Statistics.
 }
-\author{Martin Maechler (packaging for \R).}
+\author{Martin Maechler (original packaging for \R).}
 \examples{
 data(bnrf1)
 bnrf1EB[1:500]

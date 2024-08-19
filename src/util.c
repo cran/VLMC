@@ -1,4 +1,4 @@
-/* -- $Id: util.c,v 1.25 2001/10/05 19:34:59 maechler Exp $ */
+/* -- $Id: util.c,v 1.26 2024/08/14 07:34:17 maechler Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +9,7 @@
 /*-------------- Memory Allocation ------------------
  *
  * alloc()s are all done here,
- * but	free()'s are done in  gen.c and prune.c	 --> need Calloc() & Free()
+ * but	free()'s are done in  gen.c and prune.c	 --> need R_Calloc() & R_Free()
  *
  */
 
@@ -26,12 +26,12 @@ set_t *create_set(void)
 {
   set_t *set;
 
-  if ((set = Calloc(1, set_t)) == NULL) {
+  if ((set = R_Calloc(1, set_t)) == NULL) {
       /* was: return NULL; */
       VLMC_ERROR("%s\n", "create_set: Couldn't allocate set [util.c]");
   }
   set->num = 0;
-  set->list = Calloc(BLOCK, int);
+  set->list = R_Calloc(BLOCK, int);
   set->size = (set->list == NULL) ? 0 : BLOCK;
 
   return set;
@@ -41,8 +41,8 @@ void free_set(set_t *set)
 {
     if(set != NULL) {
 	if(set->list != NULL)
-	    Free(set->list);
-	Free(set);
+	    R_Free(set->list);
+	R_Free(set);
     }
 }
 
@@ -51,7 +51,7 @@ void push(set_t *set, int i)
     int *ptr;
     while (set->num >= set->size) {/* Extend the current set->list : */
 	set->size += BLOCK;
-	if ((ptr = Realloc(set->list, set->size, int))
+	if ((ptr = R_Realloc(set->list, set->size, int))
 	    /* (int *)realloc(set->list, sizeof(int) * (set->size + BLOCK))) */
 	    == NULL) {
 	    /* was: return; */
@@ -71,7 +71,7 @@ node_t *create_node(int level, set_t *vals)
     node_t *node;
     int i;
 
-    if ((node = Calloc(1, node_t)) == NULL)
+    if ((node = R_Calloc(1, node_t)) == NULL)
 	return NULL;/* allocation failed; caller (!) should complain */
 
     node->vals = vals;
@@ -93,7 +93,7 @@ int free_node(node_t *node)
 	free_set(node->vals);
 	for (i = 0; i < alpha_len; i++)
 	    res += free_node(node->child[i]);
-	Free(node);
+	R_Free(node);
     }
     return res;
 }

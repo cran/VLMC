@@ -1,4 +1,4 @@
-/* -- $Id: vlmc.h,v 1.23 2018/10/03 09:16:40 maechler Exp $ */
+/* -- $Id: vlmc.h,v 1.24 2024/08/14 07:34:17 maechler Exp $ */
 
 #ifndef VLMC_H
 #define VLMC_H
@@ -46,13 +46,14 @@ extern char alpha[];
 # define S_alloc(nelem, eltsize)	malloc((eltsize)*(nelem))
 # define S_realloc(p, new, old, size) 	realloc(p, (size)*(new))
 
-# define Calloc(n, t)   (t *)  calloc( (size_t) (n), sizeof(t) )
-# define Realloc(p,n,t) (t *) realloc( (void *)(p), (size_t)((n) * sizeof(t)) )
-# define Free(p) 		(free( (void *)(p) ), (p) = NULL)
+# define R_Calloc(n, t)   (t *) calloc( (size_t) (n), sizeof(t) )
+# define R_Realloc(p,n,t) (t *) realloc( (void *)(p), (size_t)((n) * sizeof(t)) )
+# define R_Free(p) 		(free( (void *)(p) ), (p) = NULL)
 
 
 #else //------------ R package
 
+#define STRICT_R_HEADERS
 #  include <R.h>
 #  include <R_ext/RS.h>
 #  include <R_ext/PrtUtil.h>

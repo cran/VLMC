@@ -14,9 +14,10 @@
 }
 \source{
   \file{rainfall.dat} in Rob J. Hyndman's \emph{Time Series Data Library},
-  \url{http://www-personal.buseco.monash.edu.au/~hyndman/TSDL/}
+  % \url{https://www-personal.buseco.monash.edu.au/~hyndman/TSDL/}
+  currently available at \url{https://pkg.yangzhuoranyang.com/tsdl/}
 
-  originally, Australian Bureau of Meteorology, \url{http://www.abs.gov.au}.
+  originally, Australian Bureau of Meteorology, \url{https://www.abs.gov.au}.
 }
 \note{
   There must be one extra observation since for the ten years with two
