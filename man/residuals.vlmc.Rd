@@ -1,4 +1,4 @@
-% $Id: residuals.vlmc.Rd,v 1.11 2012/09/11 16:57:09 maechler Exp $
+% $Id: residuals.vlmc.Rd,v 1.12 2024/11/20 10:48:58 maechler Exp $
 \name{residuals.vlmc}
 \alias{residuals.vlmc}
 \title{Compute Residuals of a Fitted VLMC Object}
@@ -51,7 +51,7 @@
   \eqn{r_i = \pm\sqrt{-2\log(P_i)}}{r[i] = +- sqrt(-2 log(P[i]))}
   where \eqn{P_i}{P[i]} is the predicted probability for the i-th
   observation which is the same as \eqn{p_{i,y_i}}{p[i,y[i]]} above (now
-  assuming \eqn{y_i \in \{1,2,\dots,m}{y[i] in \{1,2,...,m\}}).
+  assuming \eqn{y_i \in \{1,2,\ldots,m}{y[i] in \{1,2,...,m\}}).
   The sum of the squared deviance residuals \emph{is} the deviance of
   the fitted model.
 }

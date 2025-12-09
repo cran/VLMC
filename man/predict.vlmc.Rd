@@ -1,4 +1,4 @@
-% $Id: predict.vlmc.Rd,v 1.11 2014/06/03 09:48:05 maechler Exp $
+% $Id: predict.vlmc.Rd,v 1.12 2024/11/20 10:48:58 maechler Exp $
 \name{predict.vlmc}
 \title{Prediction of VLMC for (new) Series}
 \description{
@@ -53,7 +53,7 @@
 
     \code{pm[i,k]} is
 %%-- TODO : first row, instead of NA, use marginals  Pr[ Y[i] = k ] !!
-    \eqn{\hat P[Y_i = k | Y_{i-1},\dots]}{Pr(Y[i]=k | Y[i-1,...])} (and
+    \eqn{\hat P[Y_i = k | Y_{i-1},\ldots]}{Pr(Y[i]=k | Y[i-1,...])} (and
     is therefore \code{\link{NA}} for \code{i=1}).
     The \code{\link{dimnames}} of \code{pm} are the values of
     \code{newdata[]} and the alphabet letters \code{k}.}
@@ -93,7 +93,7 @@
   The \code{\link{print}} method \code{print.predict.vlmc} uses
   \code{\link[MASS]{fractions}} from package \pkg{MASS} to display
   the probabilities \eqn{Pr[X = j]}, for
-  \eqn{j \in \{0,1,\dots\}}{j in {0,1,...}}, as these are rational
+  \eqn{j \in \{0,1,\ldots\}}{j in {0,1,...}}, as these are rational
   numbers, shown as fractions of integers.
 }
 \seealso{\code{\link{vlmc}} and \code{\link{residuals.vlmc}}.  For

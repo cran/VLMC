@@ -1,3 +1,13 @@
+2025-12-06  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version, src/vlmc.h): 1.4-5 .. no longer #include <R_ext/PrtUtil.h>
+
+2024-11-20  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 1.4-4-1
+	* man/predict.vlmc.Rd, man/residuals.vlmc.Rd: use \ldots, not \dots
+	in LaTeX \eqn{.}.
+
 2024-08-14  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* src/util.c: s /Free()/R_Free()/ etc -- i.e. using STRICT_R_HEADERS

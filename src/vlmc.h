@@ -1,4 +1,4 @@
-/* -- $Id: vlmc.h,v 1.24 2024/08/14 07:34:17 maechler Exp $ */
+/* -- $Id: vlmc.h,v 1.25 2025/12/06 16:58:15 maechler Exp maechler $ */
 
 #ifndef VLMC_H
 #define VLMC_H
@@ -56,7 +56,7 @@ extern char alpha[];
 #define STRICT_R_HEADERS
 #  include <R.h>
 #  include <R_ext/RS.h>
-#  include <R_ext/PrtUtil.h>
+#  include <Rinternals.h> // for SEXP ; invalid from Dec.2025: #include <R_ext/PrtUtil.h>
 
 # define Rprintf0(x) 	        Rprintf(x)
 # define Rprintf2(fmt,x,x2) 	Rprintf(fmt,x,x2)
