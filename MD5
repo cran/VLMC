@@ -1,5 +1,5 @@
-78962a75cfe98b30b9e47116de5accc7 *ChangeLog
-048669ed121c6baa6c9d41207b32f923 *DESCRIPTION
+9331e35ec76ed59452be1ee328dfc878 *ChangeLog
+a5c74ab9bc76aaae1e52ae494f5788d5 *DESCRIPTION
 9c0dbf47ef9097b472238a2815b51565 *NAMESPACE
 b5dc25f5ad2d8679f1e0c002de662349 *R/alphabet.R
 f98c21ef14f3f52a7c7336934ceeda7a *R/conversion.R
@@ -58,7 +58,7 @@ acd437e0612fd8eeabe866aab4c1e892 *src/vlmc_R_pkg.h
 b1c7623595d1b92d4beaceb812af08d1 *src/vlmc_io.h
 909ca7298da6f6d1b1d88130c995adbc *tests/AIC-etc.R
 7d6ef28b5d89c76036131b560110f9e0 *tests/AIC-etc.Rout.save
-a717d4aa01d4628c90de87c224d13d02 *tests/iid-cutoff.R
-959eeecbce32a429361879b435060585 *tests/iid-cutoff.Rout.save
+7d8b5e74fc1548910653e85ca379dc2f *tests/iid-cutoff.R
+6548227f4310358429ad18c5e852d0dd *tests/iid-cutoff.Rout.save
 a38f1e8dc2c8f1364c3bf4f954da368b *tests/pred-vlmc.R
 fecb00f0ad0169ceaea624a882f1e4c6 *tests/pred-vlmc.Rout.save
